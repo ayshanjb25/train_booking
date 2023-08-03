@@ -1,0 +1,51 @@
+.form{
+    // background-color: purple;
+    display: flex;
+
+    
+    .container{
+        
+        flex:6;
+
+        // hr{
+            
+        //     height: 0;
+        //     border: 0.5px solid rgb(230,227,227);
+
+        // }
+        .formContainer{
+            display: flex;
+            flex-direction: column;
+            margin:20px 50px 20px 50px;
+            padding:20px 20px 20px 20px;
+            gap:30px;
+            border: 0.5px solid rgb(230,227,227);
+
+            .bookCard{
+                border: 0.5px solid rgb(230,227,227);
+                padding:20px 20px 20px 20px;
+                color:gray;
+                display: flex;
+                flex-direction: row;
+                
+
+            }
+
+
+            
+                
+                
+
+                
+
+            
+
+                
+
+            
+            
+
+        }
+        
+    }
+}

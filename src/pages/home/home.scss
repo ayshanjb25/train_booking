@@ -1,0 +1,22 @@
+.home{
+    // background-color: purple;
+    display: flex;
+
+    .title{
+        color:white;
+    }
+    .homeContainer{
+        
+        flex:6;
+        .widgets, .charts{
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+
+        }
+
+        .charts{
+            padding: 5px 20px;
+        }
+    }
+}

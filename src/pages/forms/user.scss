@@ -1,0 +1,142 @@
+.form{
+    // background-color: purple;
+    display: flex;
+
+    
+    .container{
+        
+        flex:6;
+
+        // hr{
+            
+        //     height: 0;
+        //     border: 0.5px solid rgb(230,227,227);
+
+        // }
+        .formContainer{
+            display: flex;
+            flex-direction: column;
+            margin:20px 50px 20px 50px;
+            padding:20px 20px 20px 20px;
+            gap:30px;
+            border: 0.5px solid rgb(230,227,227);
+
+
+            // .title{
+                
+        
+            // }
+            .imageWrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 500px;
+                height: 480px;
+                overflow: hidden;
+                
+                
+              }
+              
+              
+
+            .form{
+                
+                
+                
+
+                .formItem{
+                    margin-bottom: 20px;
+                    display: flex;
+            flex-direction: row;
+
+            label{
+                width:120px;
+            }
+
+                    input{
+                        margin-top: 5px;
+                        width: 300px;
+                    }
+                    
+
+                }
+
+                .btns{
+                    margin-top: 50px;
+                    display: flex;
+                    flex-direction: row;
+                    gap:10px;
+                    
+                    .btn1, .btn2{
+                        flex: 1;
+                        color: white;
+                    }
+
+                    .btn1{
+                        background-color: gray;
+                    }
+                    .btn2{
+                        background-color: rgb(43, 102, 211);
+                    }
+                }
+                
+            }
+
+            .passwordReset{
+                border: 1px solid rgb(43, 102, 211);
+                color:rgb(43, 102, 211);
+                padding: 20px;
+                // margin-top: 30px;
+
+                h3{
+                    margin-bottom: 10px;
+                }
+
+                p{
+                    margin-bottom: 10px;
+                }
+                
+                .btn2{
+                    background-color: rgb(43, 102, 211);
+                }
+            }
+
+            .bookingDiv{
+                position: relative;
+                background: linear-gradient(135deg, rgba(0, 123, 255, 0.5), rgba(0, 188, 212, 0.5)),
+    url('https://d3dqioy2sca31t.cloudfront.net/Projects/cms/production/000/014/619/medium/2c44077ebb22157c9e5e86f38acd85ce/tips-transportation-train-ticket.jpg');
+                /* Add any other styling properties for the container */
+                width: 200px;
+                height: 200px;
+                flex:1; 
+                padding:20px; 
+                color:white;
+                background-size: cover;
+
+                .content {
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(0%, -50%);
+                    color: white;
+                    font-size: 150%;
+                    
+                  }
+
+                
+
+            }
+
+            .bookDiv{
+                display: flex;
+                flex-Direction: row;
+                gap:10px;
+                justify-content: space-between;
+                
+                
+
+            }
+
+        }
+        
+    }
+}
