@@ -65,7 +65,9 @@ function UserProfile() {
       // Add more data objects as needed
     ];
     const btns = [
-        <Button variant="filled" color="gray">Track Train</Button>,
+      <div style={{display: "flex", gap:"10px"}}><Button variant="filled" color="gray">Track Train</Button>
+        <Button variant="filled" color="green">Book Train</Button></div>
+        
       ];
 
   return (

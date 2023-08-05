@@ -13,6 +13,9 @@ import {
 } from "@mantine/form";
 import { Button, Group, TextInput, NumberInput, Textarea } from "@mantine/core";
 import CustomTable from "../../components/table/Table";
+import { InputWithButton } from "../../components/SearchInput";
+import UpdatePassengerForm from "./forms/UpdatePassenger";
+import DeleteForm from "./forms/delete";
 
 // const title = "Account Information - Administrator";
 
@@ -47,6 +50,7 @@ function PassengerInfo() {
 
   const [showOriginalForm, setShowOriginalForm] = useState(true);
 
+
   const handlePasswordResetClick = () => {
     setShowPasswordReset(true);
     setShowOriginalForm(false);
@@ -56,20 +60,22 @@ function PassengerInfo() {
     setShowPasswordReset(false);
     setShowOriginalForm(true);
   };
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
 
 
 
-
-  const headers = ['Station Reference','Station', 'Location', 'Description'];
+  const headers = ['Passenger ID','Passenger Name', 'NIC', 'Email', 'Mobile'];
     const data = [
-      { 'Station Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura'},
-      { 'Train Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
-      { 'Train Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
-      { 'Train Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
+      { 'Passenger ID': '1', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
+      { 'Passenger ID': '2', PassengerName: 'Colombo Express', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
+      { 'Passenger ID': '3', PassengerName: 'Colombo Express', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
+      { 'Passenger ID': '4', PassengerName: 'Colombo Express', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
       // Add more data objects as needed
     ];
     const btns = [
-        <Button variant="filled" color="gray">Track Train</Button>,
+        <Button variant="filled" color="red" onClick={() => setShowDeleteForm(true)}>Delete</Button>,
+        <Button variant="filled" color="blue" onClick={() => setShowUpdateForm(true)}>Update</Button>,
       ];
 
 
@@ -85,246 +91,52 @@ function PassengerInfo() {
         <Button variant="filled" color="gray">Track Train</Button>,
       ];
 
+      const handleCancelUpdate = () => {
+        setShowUpdateForm(false);
+      };
+      const handleCancelDelete = () => {
+        setShowDeleteForm(false);
+      };
 
 
 
-
-  return (
-    <div className="form">
-      <PassengerSidebar />
-      <div className="container">
-        <Navbar />
-        <div className="formContainer">
-          <div style={{ display: "flex", flexDirection: "row", gap: "50px" }}>
-          <div style={{ flex: 2 }}>
-              <h2 className="title">Add Station</h2>
-              <form
-                component="form"
-                maw={400}
-                mx="auto"
-                onSubmit={form.onSubmit(() => {})}
-              >
-                <TextInput
-                  label="Station Name"
-                  placeholder="Enter Station Name"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-
-                <TextInput
-                  label="Location"
-                  placeholder="Enter Location"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-                <Textarea
-                  label="Description"
-                  placeholder="Enter Description"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-
-                
-              </form>
-            </div>
-
-            <div style={{ flex: 2 }}>
-              <h2 className="title">Add Train</h2>
-              <form
-                component="form"
-                maw={400}
-                mx="auto"
-                onSubmit={form.onSubmit(() => {})}
-              >
-                <TextInput
-                  label="Train Name"
-                  placeholder="Enter Station Name"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-
-                <TextInput
-                  label="Capacity"
-                  placeholder="Enter Capacity"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-                <Textarea
-                  label="Route"
-                  placeholder="Enter Route"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-
-                
-              </form>
-            </div>
-
-            {/* <div style={{flex:2}} className="imageWrapper">
-                <img src="https://www.news.lk/media/k2/items/cache/9ae1b773f33191448481aaddfbbcbf85_XL.jpg" alt="" />
-              </div> */}
-            {/* <div style={{ flex: 2 }}>
-              <h2 className="title">{title}</h2>
-              <form
-                component="form"
-                maw={400}
-                mx="auto"
-                onSubmit={form.onSubmit(() => {})}
-              >
-                <TextInput
-                  label="Username"
-                  placeholder="Username"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  disabled
-                />
-                <p
-                  style={{ fontSize: "12px", color: "gray", marginTop: "10px" }}
-                >
-                  You cannot change your username
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    gap: "15px",
-                  }}
-                >
-                  <TextInput
-                    label="First Name"
-                    placeholder="First Name"
-                    withAsterisk
-                    mt="md"
-                    {...form.getInputProps("fname")}
-                    style={{ flex: 1 }}
-                  />
-
-                  <TextInput
-                    label="Last Name"
-                    placeholder="Last Name"
-                    withAsterisk
-                    mt="md"
-                    {...form.getInputProps("lname")}
-                    style={{ flex: 1 }}
-                  />
-                </div>
-
-                <TextInput
-                  label="Email"
-                  placeholder="Email"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("email")}
-                  disabled
-                />
-
-                <TextInput
-                  label="NIC"
-                  placeholder="NIC"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("nic")}
-                />
-
-                <TextInput
-                  label="Mobile No"
-                  placeholder="+94-"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("mobile")}
-                />
-
-                <Group position="right" mt="md">
-                  <Button type="submit">Reset</Button>
-                  <Button type="submit">Submit</Button>
-                </Group>
-              </form>
-            </div> */}
-          </div>
-          {/* <div className="passwordReset">
-            <h3>Reset Existing Password</h3>
-            <p>
-              To reset your password you should provide your existing password
-              and then we will update your new password to our system{" "}
-            </p>
-
-            {!showPasswordReset ? (
-              <Button className="btn2" onClick={handlePasswordResetClick}>
-                Reset Password
-              </Button>
-            ) : (
-              <div className="resetPassword">
-                <form>
-                  <TextInput
-                    label="New Password"
-                    placeholder="New Password"
-                    withAsterisk
-                    mt="md"
-                    // {...form.getInputProps('email')}
-                  />
-                  <TextInput
-                    label="Confirm Password"
-                    placeholder="Confirm Password"
-                    withAsterisk
-                    mt="md"
-                    // {...form.getInputProps('email')}
-                  />
-                  <Group position="right" mt="md">
-                    <Button
-                      className="btn2"
-                      onClick={handlePasswordResetCancel}
-                    >
-                      Cancel
-                    </Button>
-                    <Button className="btn2">Save</Button>
-                  </Group>
-                </form>
+      return (
+        <div className="form">
+          <PassengerSidebar />
+          <div className="container">
+            <Navbar />
+            <div className="formContainer">
+              <div style={{ display: "flex", flexDirection: "row", gap: "50px" }}>
+                {/* ... */}
               </div>
-            )}
-          </div> */}
-        </div>
-
-
-        <div className='formContainer' style={{border:"none",padding:"20px 10px 0px 10px",display:"flex", flexDirection: "row"}}>
-            <div style={{flex:1}}>
-            <h2 className='title'>Stations</h2>
-            <CustomTable headers={headers}
-                        data={data}
-                        buttonComponents={btns}
-                        />
-
+    
+              <div className="formContainer" style={{ border: "none", padding: "20px 10px 0px 10px", display: "flex", flexDirection: "row" }}>
+                <div>
+                  <div style={{ display: "flex", flexDirection: "row", marginBottom: "30px" }}>
+                    <h2 className="title" style={{ flex: 2 }}>
+                      Passenger Details
+                    </h2>
+                    <InputWithButton placeholder="Search Passenger" style={{ flex: 1 }} />
+                  </div>
+                  <CustomTable headers={headers} data={data} buttonComponents={btns} />
+                  {showUpdateForm && (
+                    <div className="update-form-overlay">
+                      <UpdatePassengerForm onClose={handleCancelUpdate} />
+                    </div>
+                  )}
+                  {showDeleteForm && (
+                    <div className="update-form-overlay">
+                      <DeleteForm onClose={handleCancelDelete} />
+                    </div>
+                  )}
+                </div>
+              </div>
+              {/* ... */}
             </div>
-
-            <div style={{flex:2}}>
-            <h2 className='title'>Trains</h2>
-            <CustomTable headers={headers2}
-                        data={data2}
-                        buttonComponents={btns2}
-                        />
-
-            </div>
-            
-            
-            
-            
+          </div>
         </div>
-      </div>
-    </div>
-  );
-}
+      );
+    }
+
 
 export default PassengerInfo;

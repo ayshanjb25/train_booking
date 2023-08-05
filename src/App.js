@@ -1,5 +1,5 @@
 import Home from './pages/home/Home'
-import Login from './pages/login/Login'
+import Login, { AuthenticationImage } from './pages/login/Login'
 import List from './pages/list/List'
 import New from './pages/new/New'
 import Single from './pages/single/Single'
@@ -17,6 +17,9 @@ import AdminUser from './pages/admin/AdminUser'
 import AdminProfile from './pages/admin/AdminProfile'
 import Station from './pages/admin/Station'
 import PassengerInfo from './pages/admin/Passenger'
+import UpdatePassengerForm from './pages/admin/forms/UpdatePassenger'
+import DeleteForm from './pages/admin/forms/delete'
+import BookTrainForm from './pages/passenger/forms/BookTrain'
 
 function App() {
   return (
@@ -29,11 +32,12 @@ function App() {
         <Routes>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
+          {/* <Route path="login" element={<Login />} /> */}
           {/* <Route path="admin" element={<AdminUser/>}/> */}
           <Route path="admin-profile" element={<AdminProfile/>}/>
           <Route path="station" element={<Station/>}/>
           <Route path="passengerInfo" element={<PassengerInfo/>}/>
+          <Route path="login" element={<AuthenticationImage/>}/>
           
           <Route path="users">
             <Route index element={<List />} />
@@ -51,9 +55,10 @@ function App() {
           <Route path="user" >
           <Route index element={<UserProfile />} />
             <Route path="booking-history" element={<BookingHistory />} />
+            
 
           </Route>
-          
+          <Route path="booktrain" element={<BookTrainForm/>}/>
           <Route index element={<Home />} />
         {/* <Route
           path="dashboard"
