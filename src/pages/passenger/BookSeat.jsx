@@ -7,6 +7,7 @@ import { DatePickerInput } from '@mantine/dates';
 import { useForm, isNotEmpty, isEmail, isInRange, hasLength, matches } from '@mantine/form';
 import { createStyles, rem, Select, Button, Group, TextInput} from '@mantine/core';
 import CustomTable from '../../components/table/Table';
+import BookTrainForm from './forms/BookTrain';
 
 const title= "Book your seat"
 const title2= "Available Trains"
@@ -55,6 +56,8 @@ function UserProfile() {
     },
     
   });
+  const [showBookTrainForm, setShowBookTrainForm] = useState(false);
+
 
   const headers = ['Train Reference','Train', 'Available Seats', 'From Station', 'To Station', 'Date', 'Start Time', 'Reach Time'];
     const data = [
@@ -66,9 +69,13 @@ function UserProfile() {
     ];
     const btns = [
       <div style={{display: "flex", gap:"10px"}}><Button variant="filled" color="gray">Track Train</Button>
-        <Button variant="filled" color="green">Book Train</Button></div>
+        <Button variant="filled" color="green" onClick={() => setShowBookTrainForm(true)}>Book Train</Button></div>
         
       ];
+      const handleCancelBookTrain = () => {
+        setShowBookTrainForm(false);
+      };
+
 
   return (
     <div className='form'>
@@ -184,6 +191,11 @@ function UserProfile() {
                         data={data}
                         buttonComponents={btns}
                         />
+                        {showBookTrainForm && (
+                    <div className="update-form-overlay">
+                      <BookTrainForm onClose={handleCancelBookTrain} />
+                    </div>
+                  )}
             </div>
             
         </div>

@@ -1,5 +1,5 @@
 import Home from './pages/home/Home'
-import Login, { AuthenticationImage } from './pages/login/Login'
+import  { AuthenticationImage } from './pages/login/Login'
 import List from './pages/list/List'
 import New from './pages/new/New'
 import Single from './pages/single/Single'
@@ -20,6 +20,11 @@ import PassengerInfo from './pages/admin/Passenger'
 import UpdatePassengerForm from './pages/admin/forms/UpdatePassenger'
 import DeleteForm from './pages/admin/forms/delete'
 import BookTrainForm from './pages/passenger/forms/BookTrain'
+import Register from './pages/register/Register'
+import PassengerTravelHistory from './pages/admin/PassengerTravelHistory'
+import ViewTravelHistory from './pages/admin/forms/ViewTravelDetails'
+import ViewTravelHistoryForm from './pages/admin/forms/ViewTravelDetails'
+
 
 function App() {
   return (
@@ -38,7 +43,9 @@ function App() {
           <Route path="station" element={<Station/>}/>
           <Route path="passengerInfo" element={<PassengerInfo/>}/>
           <Route path="login" element={<AuthenticationImage/>}/>
-          
+          <Route path="register" element={<Register/>}/>
+          <Route path="passengertravelhistory" element={<PassengerTravelHistory/>}/>
+         
           <Route path="users">
             <Route index element={<List />} />
             <Route path="new" element={<New />} />

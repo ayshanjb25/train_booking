@@ -68,9 +68,9 @@ function PassengerInfo() {
   const headers = ['Passenger ID','Passenger Name', 'NIC', 'Email', 'Mobile'];
     const data = [
       { 'Passenger ID': '1', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
-      { 'Passenger ID': '2', PassengerName: 'Colombo Express', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
-      { 'Passenger ID': '3', PassengerName: 'Colombo Express', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
-      { 'Passenger ID': '4', PassengerName: 'Colombo Express', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
+      { 'Passenger ID': '2', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
+      { 'Passenger ID': '3', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
+      { 'Passenger ID': '4', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
       // Add more data objects as needed
     ];
     const btns = [

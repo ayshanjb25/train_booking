@@ -43,7 +43,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function QtyInput({ min = 1, max = 10 }) {
+export default function QtyInput({ min = 0, max = 10 }) {
   const { classes } = useStyles();
   const handlers = useRef(null);
   const [value, setValue] = useState(1);

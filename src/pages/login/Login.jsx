@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Paper,
     createStyles,
@@ -16,7 +17,7 @@ import {
       minHeight: rem(900),
       backgroundSize: 'cover',
       backgroundImage:
-        'url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.visitsrilankatours.co.uk%2Ftrain-tickets-1.html&psig=AOvVaw116e0mMleolOccWKeOyrGb&ust=1691299295064000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOjGlIHjxIADFQAAAAAdAAAAABAd)',
+        'url(https://www.fodors.com/wp-content/uploads/2020/01/srilankatrain5.jpg)',
     },
   
     form: {
@@ -53,6 +54,23 @@ import {
           <Button fullWidth mt="xl" size="md">
             Login
           </Button>
+          <Button style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold',alignItems:'center',justifyContent:'center',marginTop: '16px', marginLeft: '40px' }}>
+          Do not have an account? Register here
+          </Button>
+          <div>
+            <p style={{marginTop: '50px', fontSize: '20px', fontWeight: 'bold'}}>Contact Us</p>
+            <p style={{marginTop: '20px'}}>Book Your Train Headquaters,</p>
+            <p>No. 101, Galle Road,</p>
+            <p>Colombo 04, Sri Lanka.</p>
+            <p>Telephone : +94771256633 or 011251133</p>
+            <p>Email: bookyourtrain@gmail.com</p>
+          </div>
+          <div>
+          <p style={{marginTop: '45px', fontSize: '20px', fontWeight: 'bold'}}>Terms an Conditions</p>
+          <Button style={{ backgroundColor: 'grey', color: 'white', fontWeight: 'bold',alignItems:'left',justifyContent:'center',marginTop: '16px'}}>
+          Click here
+          </Button>
+          </div>
   
           {/* <Text ta="center" mt="md">
   Don&apos;t have an account?{' '}
@@ -64,4 +82,4 @@ import {
       </div>
     );
   }
-  
+  export default AuthenticationImage;

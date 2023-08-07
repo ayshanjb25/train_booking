@@ -19,11 +19,12 @@ function DeleteForm(props) {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <Container size="sm">
-        <Paper style={{ padding: "30px", width: "400px" }}>
+        <Paper style={{ padding: "30px", width: "400px",  }}>
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "10vh" }}>
             <h2 style={{ flex: 1, textAlign: "center" }}>Delete Passenger</h2>
           </div>
           <form>
+            
             <p>Are you sure you want to delete this record?</p>
             {/* <TextInput
               label="Name"
