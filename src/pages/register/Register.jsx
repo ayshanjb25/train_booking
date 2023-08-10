@@ -50,7 +50,7 @@ import { alignProperty } from '@mui/material/styles/cssUtils';
           <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
             Register for Book Your Train!
           </Title>
-  
+  <form>
           <TextInput label="Full Name" placeholder="Enter your full name" size="md" style={{ width: '400px' }} />
           <div style={{ display: 'flex', gap: '16px', marginTop: '16px' }}>
             <Checkbox label="Mr" size="md" />
@@ -64,7 +64,7 @@ import { alignProperty } from '@mui/material/styles/cssUtils';
           <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" style={{ width: '400px' }} />
           <Button fullWidth mt="xl" size="md" style={{ width: '400px' }}>
             Create Account
-          </Button>
+          </Button></form>
           {/* <Button style={{ backgroundColor: 'grey', color: 'white', fontWeight: 'bold',alignItems:'center',justifyContent:'center',marginTop: '16px', }}>
           Do not have an account? Register here
           </Button> */}

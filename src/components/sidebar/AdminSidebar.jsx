@@ -16,7 +16,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 const AdminSidebar = () => {
     return (
         <div className='sidebar'>
-            <div className='top'><span className="logo">hello</span></div>
+            <div className='top'><span className="logo">Book Your Train</span></div>
             <hr/>
             <div className='center'>
                 <ul>

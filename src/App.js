@@ -36,7 +36,7 @@ function App() {
      <BrowserRouter>
         <Routes>
         <Route path="/">
-          <Route index element={<Home />} />
+          <Route index element={<BookSeat />} />
           {/* <Route path="login" element={<Login />} /> */}
           {/* <Route path="admin" element={<AdminUser/>}/> */}
           <Route path="admin-profile" element={<AdminProfile/>}/>

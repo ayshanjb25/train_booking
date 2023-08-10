@@ -11,6 +11,7 @@ import {
     Anchor,
     rem,
   } from '@mantine/core';
+import { Link } from 'react-router-dom';
   
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -54,9 +55,9 @@ import {
           <Button fullWidth mt="xl" size="md">
             Login
           </Button>
-          <Button style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold',alignItems:'center',justifyContent:'center',marginTop: '16px', marginLeft: '40px' }}>
-          Do not have an account? Register here
-          </Button>
+          <p style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold',alignItems:'center',justifyContent:'center',marginTop: '16px', marginLeft: '40px' }}>
+          Do not have an account? <Link style={{}} to="/register">Register here</Link>
+          </p>
           <div>
             <p style={{marginTop: '50px', fontSize: '20px', fontWeight: 'bold'}}>Contact Us</p>
             <p style={{marginTop: '20px'}}>Book Your Train Headquaters,</p>

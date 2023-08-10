@@ -17,7 +17,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 const PassengerSidebar = () => {
     return (
         <div className='sidebar'>
-            <div className='top'><span className="logo">hello</span></div>
+            <div className='top'><span className="logo">Book Your Train</span></div>
             <hr/>
             <div className='center'>
                 <ul>
@@ -29,31 +29,31 @@ const PassengerSidebar = () => {
                     <p className="title">LISTS</p>
                     <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
-                        <Link to="/book">Book Seats</Link>
+                        <Link className='link' to="/book">Book Seats</Link>
                     </li>
                     <li>
                         <ShoppingCartOutlinedIcon className='icon'/>
-                        <span >Track Train</span>
+                        <Link className='link' to="/book">Track Train</Link>
                     </li>
                     <li>
                         <CreditCardOutlinedIcon className='icon'/>
-                        <Link className='link'to="/passengerInfo">Booking History</Link>
+                        <Link className='link' to="/passengerInfo">Booking History</Link>
                     </li>
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>
-                        <span>Cart</span>
+                        <Link className='link' to="/book">Cart</Link>
                     </li>
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>
-                        <span>Payment</span>
+                        <Link className='link' to="/book">Payment</Link>
                     </li>
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>
-                        <span>Loyalty</span>
+                        <Link className='link' to="/book">Loyalty</Link>
                     </li>
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>
-                        <span>Preferences</span>
+                        <Link className='link' to="/book">Preferences</Link>
                     </li>
                     {/* <p className="title">USEFUL</p>
                     <li>
@@ -79,12 +79,12 @@ const PassengerSidebar = () => {
                     </li> */}
                     <p className="title">USER</p>
                     <li>
-                        <AccountCircleOutlinedIcon className='icon'/>    
-                        <span>Profile</span>
+                        <AccountCircleOutlinedIcon className='icon'/>  
+                        <Link className='link' to="/user">Profile</Link>
                     </li>
                     <li>
                         <LogoutOutlinedIcon className='icon'/>
-                        <span>Logout</span>
+                        <Link className='link' to="/login">Logout</Link>
                     </li>
                 </ul>
             </div>
