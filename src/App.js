@@ -24,6 +24,7 @@ import Register from './pages/register/Register'
 import PassengerTravelHistory from './pages/admin/PassengerTravelHistory'
 import ViewTravelHistory from './pages/admin/forms/ViewTravelDetails'
 import ViewTravelHistoryForm from './pages/admin/forms/ViewTravelDetails'
+import AuthenticationImage2 from './pages/admin/login/Login'
 
 
 function App() {

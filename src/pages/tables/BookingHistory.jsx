@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PassengerSidebar from '../../components/sidebar/PassengerSidebar'
 import Navbar from '../../components/navbar/Navbar'
 // import './user.scss'

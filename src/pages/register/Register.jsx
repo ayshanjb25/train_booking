@@ -6,11 +6,9 @@ import {
     Checkbox,
     Button,
     Title,
-    Text,
-    Anchor,
     rem,
   } from '@mantine/core';
-import { alignProperty } from '@mui/material/styles/cssUtils';
+// import { alignProperty } from '@mui/material/styles/cssUtils';
    
   const useStyles = createStyles((theme) => ({
     // wrapper: {
