@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Paper,
     createStyles,
@@ -11,7 +11,9 @@ import {
     Anchor,
     rem,
   } from '@mantine/core';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+import axios from 'axios';
   
   const useStyles = createStyles((theme) => ({
     wrapper: {
@@ -40,7 +42,44 @@ import { Link } from 'react-router-dom';
     },
   }));
   
-  export function AuthenticationImage() {
+  export const Login = () => {
+
+    const [credentials, setCredentials] = useState({
+      email:undefined,
+      password:undefined
+    });
+
+    const {user,loading, error, dispatch} = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    const handleChange = (e)=>{
+      setCredentials((prev)=>({...prev, [e.target.id]:e.target.value}))
+    }     
+
+    const handleLogin = async e =>{
+      e.preventDefault()
+      dispatch({type:"LOGIN_START"})
+
+      try {
+        const res = await axios.post("/auth/login", credentials);
+        dispatch({type:"LOGIN_SUCCESS", payload:res.data});
+        if (res.data.userRole === 'admin') {
+          // Navigate to the admin page
+          navigate('/admin');
+        } else {
+          // Navigate to the default page (you can modify this based on your app logic)
+          navigate('/');
+        }
+      } catch (err) {
+        dispatch({type:"LOGIN_FAILURE", payload:err.response.data});
+      }
+    }
+
+
+console.log(user);
+
+
     const { classes } = useStyles();
     return (
       <div className={classes.wrapper}>
@@ -49,12 +88,13 @@ import { Link } from 'react-router-dom';
             Welcome to Book Your Train!
           </Title>
   
-          <TextInput label="Email address" placeholder="hello@gmail.com" size="md" />
-          <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" />
+          <TextInput label="Email address" placeholder="hello@gmail.com" id="email" size="md" onChange={handleChange}/>
+          <PasswordInput label="Password" placeholder="Your password" id="password" mt="md" size="md" onChange={handleChange}/>
           <Checkbox label="Keep me logged in" mt="xl" size="md" />
-          <Button fullWidth mt="xl" size="md">
+          <Button disabled={loading} fullWidth mt="xl" size="md" onClick={handleLogin}>
             Login
           </Button>
+          {error && <span>{error.message}</span>}
           <p style={{ backgroundColor: 'white', color: 'black', fontWeight: 'bold',alignItems:'center',justifyContent:'center',marginTop: '16px', marginLeft: '40px' }}>
           Do not have an account? <Link style={{}} to="/register">Register here</Link>
           </p>
@@ -83,4 +123,3 @@ import { Link } from 'react-router-dom';
       </div>
     );
   }
-  export default AuthenticationImage;
