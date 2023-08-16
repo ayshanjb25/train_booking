@@ -44,7 +44,7 @@ function App() {
           
           <Route path="/login" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
-          <Route path="passengertravelhistory" element={<PassengerTravelHistory/>}/>
+          
          
           <Route path="users">
             <Route index element={<List />} />
@@ -82,7 +82,8 @@ function App() {
         <Route path="admin-profile" element={<AdminProfile/>}/>
         <Route path="station" element={<Station/>}/>
         <Route path="train" element={<Train/>}/>
-          <Route path="passengerInfo" element={<PassengerInfo/>}/>
+          <Route path="passenger-info" element={<PassengerInfo/>}/>
+          <Route path="passengertravelhistory" element={<PassengerTravelHistory/>}/>
 
 
 

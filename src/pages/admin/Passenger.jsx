@@ -16,6 +16,7 @@ import CustomTable from "../../components/table/Table";
 import { InputWithButton } from "../../components/SearchInput";
 import UpdatePassengerForm from "./forms/UpdatePassenger";
 import DeleteForm from "./forms/delete";
+import AdminSidebar from "../../components/sidebar/AdminSidebar";
 
 // const title = "Account Information - Administrator";
 
@@ -102,7 +103,7 @@ function PassengerInfo() {
 
       return (
         <div className="form">
-          <PassengerSidebar />
+          <AdminSidebar />
           <div className="container">
             <Navbar />
             <div className="formContainer">

@@ -51,29 +51,29 @@ const AdminSidebar = () => {
                         <LocalShippingOutlinedIcon className='icon'/>
                         <span>Delivery</span>
                     </li> */}
-                    <p className="title">REVENUE MANAGEMENT</p>
+                    <p className="title">PASSENGER MANAGEMENT</p>
                     <li>
                         <StackedBarChartOutlinedIcon className='icon'/>
-                        <span>Ticket Sales</span>
+                        <Link className='link' to="/admin/passenger-info">Passenger</Link>
                     </li>
                     <li>
                         <NotificationsNoneOutlinedIcon className='icon'/>
-                        <span>Promotions</span>
+                        <Link className='link' to="/admin/passengertravelhistory">Travel History</Link>
                     </li>
                     <p className="title">SERVICE</p>
                     <li>
                         <SettingsSystemDaydreamOutlinedIcon className='icon'/>
-                        <span>Discount</span>
+                        <span className='link'>Discount</span>
                         
                     </li>
                     <li>
                         <SettingsSystemDaydreamOutlinedIcon className='icon'/>
-                        <span>Revenue</span>
+                        <span className='link'>Revenue</span>
                         
                     </li>
                     <li>
                         <SettingsSystemDaydreamOutlinedIcon className='icon'/>
-                        <span>Expenses</span>
+                        <span className='link'>Expenses</span>
                         
                     </li>
                     <li>

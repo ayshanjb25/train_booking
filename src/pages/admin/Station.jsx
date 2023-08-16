@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PassengerSidebar from "../../components/sidebar/PassengerSidebar";
+import AdminSidebar from "../../components/sidebar/AdminSidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "../forms/user.scss";
 import axios from 'axios'; 
@@ -35,10 +35,6 @@ function Station({stationData}) {
       })
       // .catch(error => console.error(error));
   }, []);
-
-
-
-  
 
 
 
@@ -115,7 +111,7 @@ function Station({stationData}) {
 
   return (
     <div className="form">
-      <PassengerSidebar />
+      <AdminSidebar />
       <div className="container">
         <Navbar />
         <div style={{width:"70%"}} className="formContainer">
