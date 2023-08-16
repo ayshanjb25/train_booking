@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PassengerSidebar from "../../components/sidebar/PassengerSidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "../forms/user.scss";
+import axios from 'axios'; 
 
 import {
   useForm,
@@ -16,7 +17,31 @@ import CustomTable from "../../components/table/Table";
 
 // const title = "Account Information - Administrator";
 
-function Station() {
+function Station({stationData}) {
+
+
+  const [stations, setStations] = useState([]);
+
+  useEffect(() => {
+    // Fetch station data from the backend when the component mounts
+
+    fetch('http://localhost:8800/api/stations',{
+      method:"GET",
+    })
+    .then(response => response.json())
+      .then((data)=>{
+        console.log(data, "stationData" )
+        setStations(data);
+      })
+      // .catch(error => console.error(error));
+  }, []);
+
+
+
+  
+
+
+
   const form = useForm({
     initialValues: {
       username: "",
@@ -61,29 +86,28 @@ function Station() {
 
 
   const headers = ['Station Reference','Station', 'Location', 'Description'];
-    const data = [
-      { 'Train Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura'},
-      { 'Train Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
-      { 'Train Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
-      { 'Train Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
-      // Add more data objects as needed
-    ];
-    const btns = [
-        <Button variant="filled" color="gray">Track Train</Button>,
-      ];
+    // const data = [
+    //   { 'Station Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura'},
+    //   { 'Station Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
+    //   { 'Station Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
+    //   { 'Station Reference': '1', Station: 'Colombo Express', Location: 'Colombo', Description:'Anuradhapura' },
+    //   // Add more data objects as needed
+    // ];
 
 
-      const headers2 = ['Train Reference','Train', 'Available Seats', 'From Station', 'To Station'];
-    const data2 = [
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura'},
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura' },
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura' },
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura' },
-      // Add more data objects as needed
-    ];
-    const btns2 = [
-        <Button variant="filled" color="gray">Track Train</Button>,
-      ];
+    const tableData = stations.map((station) => ({
+      'Station Reference':station._id,
+      Station: station.name,
+      Location:station.location,
+      Description: station.description
+    }));  
+
+    const btns = stations.map((station, index) => [
+        <Button key={`${station._id}-update`} variant="filled" color="blue">Edit Station</Button>,
+        <Button key={`${station._id}-delete`} variant="filled" color="red">Delete Station</Button>,
+      ]);
+
+
 
 
 
@@ -94,9 +118,8 @@ function Station() {
       <PassengerSidebar />
       <div className="container">
         <Navbar />
-        <div className="formContainer">
-          <div style={{ display: "flex", flexDirection: "row", gap: "50px" }}>
-          <div style={{ flex: 2 }}>
+        <div style={{width:"70%"}} className="formContainer">
+          <div >
               <h2 className="title">Add Station</h2>
               <form
                 component="form"
@@ -129,194 +152,34 @@ function Station() {
                   {...form.getInputProps("username")}
                   
                 />
+                <div style={{marginTop:"20px", }}>
+                <Button variant="filled" color="blue">Add Station</Button></div>
 
                 
               </form>
             </div>
 
-            <div style={{ flex: 2 }}>
-              <h2 className="title">Add Train</h2>
-              <form
-                component="form"
-                maw={400}
-                mx="auto"
-                onSubmit={form.onSubmit(() => {})}
-              >
-                <TextInput
-                  label="Train Name"
-                  placeholder="Enter Station Name"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-
-                <TextInput
-                  label="Capacity"
-                  placeholder="Enter Capacity"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-                <Textarea
-                  label="Route"
-                  placeholder="Enter Route"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-
-                
-              </form>
-            </div>
-
-            {/* <div style={{flex:2}} className="imageWrapper">
-                <img src="https://www.news.lk/media/k2/items/cache/9ae1b773f33191448481aaddfbbcbf85_XL.jpg" alt="" />
-              </div> */}
-            {/* <div style={{ flex: 2 }}>
-              <h2 className="title">{title}</h2>
-              <form
-                component="form"
-                maw={400}
-                mx="auto"
-                onSubmit={form.onSubmit(() => {})}
-              >
-                <TextInput
-                  label="Username"
-                  placeholder="Username"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  disabled
-                />
-                <p
-                  style={{ fontSize: "12px", color: "gray", marginTop: "10px" }}
-                >
-                  You cannot change your username
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    gap: "15px",
-                  }}
-                >
-                  <TextInput
-                    label="First Name"
-                    placeholder="First Name"
-                    withAsterisk
-                    mt="md"
-                    {...form.getInputProps("fname")}
-                    style={{ flex: 1 }}
-                  />
-
-                  <TextInput
-                    label="Last Name"
-                    placeholder="Last Name"
-                    withAsterisk
-                    mt="md"
-                    {...form.getInputProps("lname")}
-                    style={{ flex: 1 }}
-                  />
-                </div>
-
-                <TextInput
-                  label="Email"
-                  placeholder="Email"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("email")}
-                  disabled
-                />
-
-                <TextInput
-                  label="NIC"
-                  placeholder="NIC"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("nic")}
-                />
-
-                <TextInput
-                  label="Mobile No"
-                  placeholder="+94-"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("mobile")}
-                />
-
-                <Group position="right" mt="md">
-                  <Button type="submit">Reset</Button>
-                  <Button type="submit">Submit</Button>
-                </Group>
-              </form>
-            </div> */}
-          </div>
-          {/* <div className="passwordReset">
-            <h3>Reset Existing Password</h3>
-            <p>
-              To reset your password you should provide your existing password
-              and then we will update your new password to our system{" "}
-            </p>
-
-            {!showPasswordReset ? (
-              <Button className="btn2" onClick={handlePasswordResetClick}>
-                Reset Password
-              </Button>
-            ) : (
-              <div className="resetPassword">
-                <form>
-                  <TextInput
-                    label="New Password"
-                    placeholder="New Password"
-                    withAsterisk
-                    mt="md"
-                    // {...form.getInputProps('email')}
-                  />
-                  <TextInput
-                    label="Confirm Password"
-                    placeholder="Confirm Password"
-                    withAsterisk
-                    mt="md"
-                    // {...form.getInputProps('email')}
-                  />
-                  <Group position="right" mt="md">
-                    <Button
-                      className="btn2"
-                      onClick={handlePasswordResetCancel}
-                    >
-                      Cancel
-                    </Button>
-                    <Button className="btn2">Save</Button>
-                  </Group>
-                </form>
-              </div>
-            )}
-          </div> */}
+          
+         
         </div>
 
 
         <div className='formContainer' style={{border:"none",padding:"20px 10px 0px 10px",display:"flex", flexDirection: "row"}}>
             <div style={{flex:1}}>
             <h2 className='title'>Stations</h2>
-            <CustomTable headers={headers}
-                        data={data}
-                        buttonComponents={btns}
-                        />
+            
+            <CustomTable
+               // Make sure to provide a unique key
+              headers={headers}
+              data={tableData} // Pass the current station as an array to the CustomTable
+              buttonComponents={btns}
+              getRowId={row => row._id}
+            />
+          
 
             </div>
 
-            <div style={{flex:2}}>
-            <h2 className='title'>Trains</h2>
-            <CustomTable headers={headers2}
-                        data={data2}
-                        buttonComponents={btns2}
-                        />
-
-            </div>
+            
             
             
             
@@ -329,134 +192,3 @@ function Station() {
 
 export default Station;
 
-// const title= "Account Information - Passenger"
-// const User = () => {
-//   const [formData, setFormData] = useState({
-//     name: '',
-//     email: '',
-//     password: '',
-//   });
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // Perform form submission logic here, such as sending the data to an API
-//     console.log(formData);
-//     // Reset the form
-//     setFormData({
-//       name: '',
-//       email: '',
-//       password: '',
-//     });
-//   };
-
-//   return (
-
-//     <div className='form'>
-//             <Sidebar/>
-//             <div className="container">
-//                 <Navbar/>
-//               <div className="formContainer">
-//                 <div>
-//                   <img src="https://www.news.lk/media/k2/items/cache/9ae1b773f33191448481aaddfbbcbf85_XL.jpg" alt="" />
-//                 </div>
-//                 <h2 className='title'>{title}</h2>
-
-//                 <div className="form">
-
-//                   <form onSubmit={handleSubmit}>
-//                       <div className="formItem">
-//                           <label htmlFor="username">User Name:</label>
-//                           <input
-//                           type="text"
-//                           id="username"
-//                           name="username"
-//                           value={formData.username}
-//                           onChange={handleChange}
-//                           disabled
-//                           />
-//                       </div>
-
-//                       <div  style={{display:"flex", gap:"50px"}}>
-//                           <div className="formItem">
-//                             <label htmlFor="fname">First Name:</label>
-//                           <input
-//                           type="text"
-//                           id="fname"
-//                           name="fname"
-//                           value={formData.fname}
-//                           onChange={handleChange}
-//                           />
-//                           </div>
-//                           <div className="formItem">
-//                           <label htmlFor="lame">Last Name:</label>
-//                           <input
-//                           type="text"
-//                           id="lname"
-//                           name="lname"
-//                           value={formData.lname}
-//                           onChange={handleChange}
-//                           />
-//                           </div>
-//                       </div>
-//                       <div className="formItem">
-//                           <label htmlFor="email">Email:</label>
-//                           <input
-//                           type="email"
-//                           id="email"
-//                           name="email"
-//                           value={formData.email}
-//                           onChange={handleChange}
-//                           disabled
-//                           />
-//                       </div>
-//                       <div className="formItem">
-//                           <label htmlFor="password">Password:</label>
-//                           <input
-//                           type="password"
-//                           id="password"
-//                           name="password"
-//                           value={formData.password}
-//                           onChange={handleChange}
-//                           />
-//                       </div>
-
-//                       <div className="formItem">
-//                           <label htmlFor="mobile">Mobile No:</label>
-//                           <input
-//                           type="text"
-//                           id="mobile"
-//                           name="mobile"
-//                           value={formData.mobile}
-//                           onChange={handleChange}
-//                           />
-//                           </div>
-
-//                   <div className='passwordReset'>
-//                     <h3>Reset Existing Password</h3>
-//                     <p>To reset your password you should provide your existing password and then we will update your new password to our system </p>
-//                     <button className="btn2">Reset Password</button>
-//                   </div>
-
-//                     <div className='btns'>
-//                     <button type="submit" className="btn1">Reset</button>
-//                     <button type="submit" className="btn2">Submit</button>
-//                     </div>
-
-//                   </form>
-
-//                   </div>
-
-//                 </div>
-
-//             </div>
-//         </div>
-
-//   );
-// };

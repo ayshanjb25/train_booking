@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PassengerSidebar from '../../components/sidebar/PassengerSidebar'
+import AdminSidebar from '../../components/sidebar/AdminSidebar'
 import Navbar from '../../components/navbar/Navbar'
 import '../forms/user.scss'
 
@@ -49,7 +49,7 @@ function AdminProfile() {
 
   return (
     <div className='form'>
-      <PassengerSidebar/>
+      <AdminSidebar/>
         <div className="container">
           <Navbar/>
             <div className="formContainer">

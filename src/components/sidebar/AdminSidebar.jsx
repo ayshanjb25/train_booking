@@ -12,6 +12,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import SettingsSystemDaydreamOutlinedIcon from '@mui/icons-material/SettingsSystemDaydreamOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import { Link } from 'react-router-dom';
 
 const AdminSidebar = () => {
     return (
@@ -28,13 +29,13 @@ const AdminSidebar = () => {
                     <p className="title">LISTS</p>
                     <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
-                        <span>Station Details</span>
+                        <Link className='link' to="/admin/station">Station Details</Link>
                     </li>
                     <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
-                        <span>Train Details</span>
+                        <Link className='link' to="/admin/train">Train Details</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
                         <span>Passenger Details</span>
                     </li>
@@ -49,7 +50,7 @@ const AdminSidebar = () => {
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>
                         <span>Delivery</span>
-                    </li>
+                    </li> */}
                     <p className="title">REVENUE MANAGEMENT</p>
                     <li>
                         <StackedBarChartOutlinedIcon className='icon'/>
@@ -86,11 +87,11 @@ const AdminSidebar = () => {
                     <p className="title">USER</p>
                     <li>
                         <AccountCircleOutlinedIcon className='icon'/>    
-                        <span>Profile</span>
+                        <Link className='link' to="/admin-profile">Profile</Link>
                     </li>
                     <li>
                         <LogoutOutlinedIcon className='icon'/>
-                        <span>Logout</span>
+                        <Link className='link' to="/login">Logout</Link>
                     </li>
                 </ul>
             </div>

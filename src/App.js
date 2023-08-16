@@ -1,5 +1,5 @@
 import Home from './pages/home/Home'
-import  { AuthenticationImage } from './pages/login/Login'
+import  { AuthenticationImage, Login } from './pages/login/Login'
 import List from './pages/list/List'
 import New from './pages/new/New'
 import Single from './pages/single/Single'
@@ -24,6 +24,7 @@ import Register from './pages/register/Register'
 import PassengerTravelHistory from './pages/admin/PassengerTravelHistory'
 import ViewTravelHistory from './pages/admin/forms/ViewTravelDetails'
 import ViewTravelHistoryForm from './pages/admin/forms/ViewTravelDetails'
+import Train from './pages/admin/Train'
 
 
 function App() {
@@ -40,9 +41,8 @@ function App() {
           {/* <Route path="login" element={<Login />} /> */}
           {/* <Route path="admin" element={<AdminUser/>}/> */}
           <Route path="admin-profile" element={<AdminProfile/>}/>
-          <Route path="station" element={<Station/>}/>
-          <Route path="passengerInfo" element={<PassengerInfo/>}/>
-          <Route path="login" element={<AuthenticationImage/>}/>
+          
+          <Route path="/login" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
           <Route path="passengertravelhistory" element={<PassengerTravelHistory/>}/>
          
@@ -76,6 +76,16 @@ function App() {
             })
           }
         /> */}
+        </Route>
+        <Route path="/admin">
+        <Route index element={<AdminProfile />} />
+        <Route path="admin-profile" element={<AdminProfile/>}/>
+        <Route path="station" element={<Station/>}/>
+        <Route path="train" element={<Train/>}/>
+          <Route path="passengerInfo" element={<PassengerInfo/>}/>
+
+
+
         </Route>
         </Routes>
      

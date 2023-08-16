@@ -15,7 +15,7 @@ export default function CustomTable({ headers, data, buttonComponents }) {
   const { classes, cx } = useStyles();
   const [selection] = useState([]);
 
-  const rows = data.map((item) => {
+  const rows = data.map((item, index) => {
     const selected = selection.includes(item.id);
     return (
       <tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
@@ -32,7 +32,7 @@ export default function CustomTable({ headers, data, buttonComponents }) {
   });
 
   return (
-    <ScrollArea style={{ width: "1000px" }}>
+    <ScrollArea style={{ width: "100%" }}>
       <Table miw={800} verticalSpacing="sm" className="table">
         <thead>
           <tr>
