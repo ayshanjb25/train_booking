@@ -15,6 +15,7 @@ import { alignProperty } from '@mui/material/styles/cssUtils';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { RegisterContext } from '../../context/RegisterContext';
+import useFetch from '../../hooks/useFetch';
    
   const useStyles = createStyles((theme) => ({
     // wrapper: {
@@ -51,6 +52,7 @@ import { RegisterContext } from '../../context/RegisterContext';
   
   export function Register() {
     const { classes } = useStyles();
+    const { fetchData, data: fetchResult, loading: fetchLoading, error: fetchError } = useFetch('http://localhost:8800/api/auth/register');
 
     const [userData, setUserData] = useState({
       firstname:'',
@@ -62,8 +64,9 @@ import { RegisterContext } from '../../context/RegisterContext';
       password:'',
     });
    
-  
-    const {user,loading, error, dispatch} = useContext(RegisterContext);
+    const { dispatch } = useFetch();
+
+    const {user,loading, error} = useContext(RegisterContext);
   
       const navigate = useNavigate();
   
@@ -74,7 +77,7 @@ import { RegisterContext } from '../../context/RegisterContext';
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const res = await axios.post("/auth/register", userData);
+        const res = await axios.post('http://localhost:8800/api/auth/register', userData);
         // const response = await registerUser(userData);
         dispatch({ type: 'REGISTER_SUCCESS', payload: res.data.user });
         navigate('/login');
@@ -96,7 +99,7 @@ import { RegisterContext } from '../../context/RegisterContext';
       <div className={classes.wrapper}>
         <Paper className={classes.form} radius={0} p={30}>
           <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
-            Register for Book Your Train!
+            Register for BookMyTrain!
           </Title>
   <form onSubmit={handleSubmit}>
           <TextInput label="First Name" id="firstname" placeholder="Enter your First name" size="md" style={{ width: '400px' }} onChange={handleChange}/>

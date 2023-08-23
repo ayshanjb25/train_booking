@@ -100,7 +100,7 @@ console.log(user);
           </p>
           <div>
             <p style={{marginTop: '50px', fontSize: '20px', fontWeight: 'bold'}}>Contact Us</p>
-            <p style={{marginTop: '20px'}}>Book Your Train Headquaters,</p>
+            <p style={{marginTop: '20px'}}>BookMyTrain Headquaters,</p>
             <p>No. 101, Galle Road,</p>
             <p>Colombo 04, Sri Lanka.</p>
             <p>Telephone : +94771256633 or 011251133</p>

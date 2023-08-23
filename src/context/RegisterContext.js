@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 
+
 const INITIAL_STATE ={
     user : JSON.parse(localStorage.getItem("user")) || null,
     loading:false,
@@ -36,6 +37,6 @@ export const RegisterContextProvider = ({ children }) => {
   };
 
 
-  export const useRegister = () => {
+  export const useFetch = () => {
     return useContext(RegisterContext);
   };

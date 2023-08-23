@@ -14,6 +14,9 @@ import {
 } from "@mantine/form";
 import { Button, Group, TextInput, NumberInput, Textarea } from "@mantine/core";
 import CustomTable from "../../components/table/Table";
+import { InputWithButton } from "../../components/SearchInput";
+import UpdateStationForm from "./forms/UpdateStation";
+import DeleteForm from "./forms/delete";
 
 // const title = "Account Information - Administrator";
 
@@ -78,6 +81,19 @@ function Station({stationData}) {
     setShowOriginalForm(true);
   };
 
+  const handleEditTrainClick = () => {
+    setShowUpdateForm(true);
+    setShowDeleteForm(false); // Close the delete form if it's open
+  };
+  
+  // const handleDeleteTrainClick = () => {
+  //   setShowUpdateForm(false); // Close the update form if it's open
+  //   setShowDeleteForm(true);
+  // };
+  
+
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
 
 
 
@@ -98,12 +114,49 @@ function Station({stationData}) {
       Description: station.description
     }));  
 
-    const btns = stations.map((station, index) => [
-        <Button key={`${station._id}-update`} variant="filled" color="blue">Edit Station</Button>,
-        <Button key={`${station._id}-delete`} variant="filled" color="red">Delete Station</Button>,
-      ]);
+    // const btns = stations.map((station, index) => [
+    //     <Button key={`${station._id}-update`} variant="filled" color="blue">Edit Station</Button>,
+    //     <Button key={`${station._id}-delete`} variant="filled" color="red">Delete Station</Button>,
+    //   ]);
 
+    const btns =  [
+      <Button key={1} variant="filled" color="blue"onClick={() => setShowUpdateForm(true)}>Edit Train</Button>,
+      <Button key={1} variant="filled" color="red"onClick={() => setShowDeleteForm(true)}>Delete Train</Button>,
+    ];
 
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+  
+      // Perform the POST request to the API endpoint
+      try {
+        const response = await axios.post('http://localhost:8800/api/stations', {
+          name: form.values.stationname,
+          location: form.values.location,
+          description: form.values.description,
+        });
+  
+        if (response.status === 201) {
+          console.log('Station added successfully');
+          // Clear the form fields after successful submission
+          form.setValues({
+            stationname: '',
+            location: '',
+            description: '',
+          });
+        } else {
+          console.error('Failed to add station');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    const handleCancelUpdate = () => {
+      setShowUpdateForm(false);
+    };
+    const handleCancelDelete = () => {
+      setShowDeleteForm(false);
+    };
 
 
 
@@ -128,7 +181,7 @@ function Station({stationData}) {
                   placeholder="Enter Station Name"
                   withAsterisk
                   mt="md"
-                  {...form.getInputProps("username")}
+                  {...form.getInputProps("stationname")}
                   
                 />
 
@@ -137,7 +190,7 @@ function Station({stationData}) {
                   placeholder="Enter Location"
                   withAsterisk
                   mt="md"
-                  {...form.getInputProps("username")}
+                  {...form.getInputProps("location")}
                   
                 />
                 <Textarea
@@ -145,7 +198,7 @@ function Station({stationData}) {
                   placeholder="Enter Description"
                   withAsterisk
                   mt="md"
-                  {...form.getInputProps("username")}
+                  {...form.getInputProps("description")}
                   
                 />
                 <div style={{marginTop:"20px", }}>
@@ -163,6 +216,7 @@ function Station({stationData}) {
         <div className='formContainer' style={{border:"none",padding:"20px 10px 0px 10px",display:"flex", flexDirection: "row"}}>
             <div style={{flex:1}}>
             <h2 className='title'>Stations</h2>
+            <div><InputWithButton placeholder="Stations" style={{ flex: 1 }} /></div>
             
             <CustomTable
                // Make sure to provide a unique key
@@ -171,6 +225,18 @@ function Station({stationData}) {
               buttonComponents={btns}
               getRowId={row => row._id}
             />
+            {/* Overlay for Update Form */}
+            {showUpdateForm && (
+            <div className="update-form-overlay">
+           <UpdateStationForm onClose={() => setShowUpdateForm(false)} />
+          </div>
+            )}
+           {/* Overlay for Delete Form */}
+           {showDeleteForm && (
+          <div className="update-form-overlay">
+          <DeleteForm onClose={() => setShowDeleteForm(false)} />
+          </div>
+          )}
           
 
             </div>

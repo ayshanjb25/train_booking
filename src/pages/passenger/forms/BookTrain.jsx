@@ -8,7 +8,7 @@ import { Button, Group, TextInput } from '@mantine/core';
 import QtyInput from '../../../components/QtyInput';
 
 
-const title= "Book Your Train"
+const title= "BookMyTrain"
 
 function BookTrain() {
   const form = useForm({

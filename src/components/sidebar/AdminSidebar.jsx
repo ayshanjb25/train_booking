@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 const AdminSidebar = () => {
     return (
         <div className='sidebar'>
-            <div className='top'><span className="logo">Book Your Train</span></div>
+            <div className='top'><span className="logo">BookMyTrain</span></div>
             <hr/>
             <div className='center'>
                 <ul>
