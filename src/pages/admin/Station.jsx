@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import AdminSidebar from "../../components/sidebar/AdminSidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "../forms/user.scss";
@@ -17,10 +17,14 @@ import CustomTable from "../../components/table/Table";
 import { InputWithButton } from "../../components/SearchInput";
 import UpdateStationForm from "./forms/UpdateStation";
 import DeleteForm from "./forms/delete";
+import { ReactToPrint} from 'react-to-print';
+
 
 // const title = "Account Information - Administrator";
 
 function Station({stationData}) {
+
+  const stationRef = useRef(null);
 
 
   const [stations, setStations] = useState([]);
@@ -163,6 +167,16 @@ function Station({stationData}) {
 
 
   return (
+    <div>
+      <ReactToPrint
+        trigger={()=>{
+            return <button>Print Station</button>
+        }}
+      content={()=>stationRef.current}
+      documentTitle='new document'
+      pageStyle='print'
+      />
+    
     <div className="form">
       <AdminSidebar />
       <div className="container">
@@ -214,9 +228,13 @@ function Station({stationData}) {
 
 
         <div className='formContainer' style={{border:"none",padding:"20px 10px 0px 10px",display:"flex", flexDirection: "row"}}>
-            <div style={{flex:1}}>
+            <div ref={stationRef} style={{flex:1}}>
+          
             <h2 className='title'>Stations</h2>
-            <div><InputWithButton placeholder="Stations" style={{ flex: 1 }} /></div>
+            <h2>
+              <InputWithButton placeholder="Stations" style={{ flex: 1, padding:"20px 10px 0px 10px", width:"500px" }} />
+            </h2>
+            
             
             <CustomTable
                // Make sure to provide a unique key
@@ -248,6 +266,7 @@ function Station({stationData}) {
             
         </div>
       </div>
+    </div>
     </div>
   );
 }
