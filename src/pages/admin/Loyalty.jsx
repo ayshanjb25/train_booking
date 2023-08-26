@@ -75,16 +75,36 @@ function Loyalty() {
 
 
       const headers2 = ['Pasenger ID','Passenger Name', 'Loyalty Level', 'Points'];
-    const data2 = [
-      { 'Pasenger ID': '1', 'Passenger Name': 'Ann Fernando', 'Loyalty Level': 'Gold', 'Points': '210'},
-      { 'Pasenger ID': '2', 'Passenger Name': 'Paul De Silva', 'Loyalty Level': 'Silver', 'Points': '90'},
-      { 'Pasenger ID': '3', 'Passenger Name': 'Edward Perera', 'Loyalty Level': 'Advanced', 'Points': '800'},
-      { 'Pasenger ID': '4', 'Passenger Name': 'Sally Rodrigo', 'Loyalty Level': 'Platinum', 'Points': '380'},
-      // Add more data objects as needed
-    ];
-    const btns2 = [
-        <Button variant="filled" color="gray">View Details</Button>,
-        
+      const data2 = [
+        {
+          'Pasenger ID': '1',
+          'Passenger Name': 'Ann Fernando',
+          'Loyalty Level': 'Gold',
+          'Points': '210',
+          EditButton: <Button variant="filled" color="gray">View Details</Button>
+        },
+        {
+          'Pasenger ID': '2',
+          'Passenger Name': 'Paul De Silva',
+          'Loyalty Level': 'Silver',
+          'Points': '90',
+          EditButton: <Button variant="filled" color="gray">View Details</Button>
+        },
+        {
+          'Pasenger ID': '3',
+          'Passenger Name': 'Edward Perera',
+          'Loyalty Level': 'Advanced',
+          'Points': '800',
+          EditButton: <Button variant="filled" color="gray">View Details</Button>
+        },
+        {
+          'Pasenger ID': '4',
+          'Passenger Name': 'Sally Rodrigo',
+          'Loyalty Level': 'Platinum',
+          'Points': '380',
+          EditButton: <Button variant="filled" color="gray">View Details</Button>
+        },
+        // Add more data objects as needed
       ];
 
 
@@ -146,180 +166,21 @@ function Loyalty() {
               </form>
             </div>
 
-            {/* <div style={{ flex: 2 }}>
-              <h2 className="title">Add Train</h2>
-              <form
-                component="form"
-                maw={400}
-                mx="auto"
-                onSubmit={form.onSubmit(() => {})}
-              >
-                <TextInput
-                  label="Train Name"
-                  placeholder="Enter Station Name"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-
-                <TextInput
-                  label="Capacity"
-                  placeholder="Enter Capacity"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-                <Textarea
-                  label="Route"
-                  placeholder="Enter Route"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  
-                />
-
-                
-              </form>
-            </div> */}
-
-            {/* <div style={{flex:2}} className="imageWrapper">
-                <img src="https://www.news.lk/media/k2/items/cache/9ae1b773f33191448481aaddfbbcbf85_XL.jpg" alt="" />
-              </div> */}
-            {/* <div style={{ flex: 2 }}>
-              <h2 className="title">{title}</h2>
-              <form
-                component="form"
-                maw={400}
-                mx="auto"
-                onSubmit={form.onSubmit(() => {})}
-              >
-                <TextInput
-                  label="Username"
-                  placeholder="Username"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("username")}
-                  disabled
-                />
-                <p
-                  style={{ fontSize: "12px", color: "gray", marginTop: "10px" }}
-                >
-                  You cannot change your username
-                </p>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    gap: "15px",
-                  }}
-                >
-                  <TextInput
-                    label="First Name"
-                    placeholder="First Name"
-                    withAsterisk
-                    mt="md"
-                    {...form.getInputProps("fname")}
-                    style={{ flex: 1 }}
-                  />
-
-                  <TextInput
-                    label="Last Name"
-                    placeholder="Last Name"
-                    withAsterisk
-                    mt="md"
-                    {...form.getInputProps("lname")}
-                    style={{ flex: 1 }}
-                  />
-                </div>
-
-                <TextInput
-                  label="Email"
-                  placeholder="Email"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("email")}
-                  disabled
-                />
-
-                <TextInput
-                  label="NIC"
-                  placeholder="NIC"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("nic")}
-                />
-
-                <TextInput
-                  label="Mobile No"
-                  placeholder="+94-"
-                  withAsterisk
-                  mt="md"
-                  {...form.getInputProps("mobile")}
-                />
-
-                <Group position="right" mt="md">
-                  <Button type="submit">Reset</Button>
-                  <Button type="submit">Submit</Button>
-                </Group>
-              </form>
-            </div> */}
+           
           </div>
-          {/* <div className="passwordReset">
-            <h3>Reset Existing Password</h3>
-            <p>
-              To reset your password you should provide your existing password
-              and then we will update your new password to our system{" "}
-            </p>
-
-            {!showPasswordReset ? (
-              <Button className="btn2" onClick={handlePasswordResetClick}>
-                Reset Password
-              </Button>
-            ) : (
-              <div className="resetPassword">
-                <form>
-                  <TextInput
-                    label="New Password"
-                    placeholder="New Password"
-                    withAsterisk
-                    mt="md"
-                    // {...form.getInputProps('email')}
-                  />
-                  <TextInput
-                    label="Confirm Password"
-                    placeholder="Confirm Password"
-                    withAsterisk
-                    mt="md"
-                    // {...form.getInputProps('email')}
-                  />
-                  <Group position="right" mt="md">
-                    <Button
-                      className="btn2"
-                      onClick={handlePasswordResetCancel}
-                    >
-                      Cancel
-                    </Button>
-                    <Button className="btn2">Save</Button>
-                  </Group>
-                </form>
-              </div>
-            )}
-          </div> */}
+          
         </div>
 
 
     <div className='formContainer' style={{ border: 'none', padding: '20px 10px 0px 10px', display: 'flex', flexDirection: 'column' }}>
         <div style={{ marginBottom: '20px' }}>
         <h2 className='title'>Loyalty Level Details</h2>
-        <CustomTable headers={headers} data={data} buttonComponents={btns} />
+        <CustomTable headers={headers} data={data} />
         </div>
 
         <div>
         <h2 className='title'>Passenger Loyalty Details</h2>
-        <CustomTable headers={headers2} data={data2} buttonComponents={btns2} />
+        <CustomTable headers={headers2} data={data2} />
         </div>
     </div>
 

@@ -29,7 +29,6 @@ import AddUser from './pages/admin/AddUsers'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import Discounts from './pages/admin/Discounts'
 import Loyalty from './pages/admin/Loyalty'
-import AdminDashboard from './pages/admin/AdminDashboard'
 
 
 function App() {
