@@ -25,6 +25,9 @@ import PassengerTravelHistory from './pages/admin/PassengerTravelHistory'
 import ViewTravelHistory from './pages/admin/forms/ViewTravelDetails'
 import ViewTravelHistoryForm from './pages/admin/forms/ViewTravelDetails'
 import Train from './pages/admin/Train'
+import Discounts from './pages/admin/Discounts'
+import Loyalty from './pages/admin/Loyalty'
+import AdminDashboard from './pages/admin/AdminDashboard'
 
 
 function App() {
@@ -84,6 +87,9 @@ function App() {
         <Route path="train" element={<Train/>}/>
           <Route path="passenger-info" element={<PassengerInfo/>}/>
           <Route path="passengertravelhistory" element={<PassengerTravelHistory/>}/>
+          <Route path="discounts" element={<Discounts/>}/>
+          <Route path="loyalty" element={<Loyalty/>}/>
+          <Route path="admin-dashboard" element={<AdminDashboard/>}/>
 
 
 
