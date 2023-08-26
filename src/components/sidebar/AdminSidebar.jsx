@@ -17,9 +17,7 @@ import { Link } from 'react-router-dom';
 const AdminSidebar = () => {
     return (
         <div className='sidebar'>
-            <div className='top'>
-                <span className="logo">Book Your Train</span>
-                </div>
+            <div className='top'><span className="logo">BookMyTrain</span></div>
             <hr/>
             <div className='center'>
                 <ul>
@@ -61,14 +59,14 @@ const AdminSidebar = () => {
                         <LocalShippingOutlinedIcon className='icon'/>
                         <span>Delivery</span>
                     </li> */}
-                    <p className="title">REVENUE MANAGEMENT</p>
+                    <p className="title">PASSENGER MANAGEMENT</p>
                     <li>
                         <StackedBarChartOutlinedIcon className='icon'/>
-                        <span className='link'>Ticket Sales</span>
+                        <Link className='link' to="/admin/passenger-info">Passenger</Link>
                     </li>
                     <li>
                         <NotificationsNoneOutlinedIcon className='icon'/>
-                        <span className='link'>Promotions</span>
+                        <Link className='link' to="/admin/passengertravelhistory">Travel History</Link>
                     </li>
                     <p className="title">SERVICE</p>
                     <li>

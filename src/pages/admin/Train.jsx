@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PassengerSidebar from "../../components/sidebar/PassengerSidebar";
+import AdminSidebar from "../../components/sidebar/AdminSidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "../forms/user.scss";
 
@@ -13,7 +13,7 @@ import {
 } from "@mantine/form";
 import { Button, Group, TextInput, NumberInput, Textarea } from "@mantine/core";
 import CustomTable from "../../components/table/Table";
-import AdminSidebar from "../../components/sidebar/AdminSidebar";
+// import AdminSidebar from "../../components/sidebar/AdminSidebar";
 
 // const title = "Account Information - Administrator";
 
@@ -112,10 +112,16 @@ function Train({trainData}) {
         Capacity: train.capacity
       }));  
   
-      const btns = trains.map((train, index) => [
-          <Button key={`${train._id}-update`} variant="filled" color="blue">Edit Train</Button>,
-          <Button key={`${train._id}-delete`} variant="filled" color="red">Delete Train</Button>,
-        ]);
+      // const btns = trains.map((train, index) => [
+      //     <Button key={`${train._id}-update`} variant="filled" color="blue">Edit Train</Button>,
+      //     <Button key={`${train._id}-delete`} variant="filled" color="red">Delete Train</Button>,
+      //   ]);
+
+
+      const btns =  [
+        <Button key={1} variant="filled" color="blue">Edit Train</Button>,
+        <Button key={1} variant="filled" color="red">Delete Train</Button>,
+      ];
 
 
 

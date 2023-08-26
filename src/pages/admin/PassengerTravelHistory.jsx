@@ -13,6 +13,7 @@ import {
 } from "@mantine/form";
 import { Button, Group, TextInput, NumberInput, Textarea } from "@mantine/core";
 import CustomTable from "../../components/table/Table";
+import AdminSidebar from "../../components/sidebar/AdminSidebar";
 
 // const title = "Account Information - Administrator";
 
@@ -91,7 +92,7 @@ function PassengerTravelHistory() {
 
   return (
     <div className="form">
-      <PassengerSidebar />
+      <AdminSidebar />
       <div className="container">
         <Navbar />
         <div className="formContainer">

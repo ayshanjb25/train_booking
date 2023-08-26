@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PassengerSidebar from '../../components/sidebar/PassengerSidebar'
 import QtyInput from '../../components/QtyInput'
 import Navbar from '../../components/navbar/Navbar'
@@ -8,8 +8,7 @@ import { useForm, isNotEmpty, isEmail, isInRange, hasLength, matches } from '@ma
 import { createStyles, rem, Select, Button, Group, TextInput} from '@mantine/core';
 import CustomTable from '../../components/table/Table';
 import BookTrainForm from './forms/BookTrain';
-import axios from 'axios'; 
-import TrackTrain from './forms/TrackTrain';
+import { Link } from 'react-router-dom';
 
 const title= "Book your seat"
 const title2= "Available Trains"
@@ -35,7 +34,7 @@ const useStyles = createStyles((theme) => ({
     },
   }));
   
-function UserProfile() {
+function BookSeat({availableTrainData}) {
     const { classes } = useStyles();
     const [trackTrains, setTrackTrains] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -76,37 +75,55 @@ function UserProfile() {
     },
     
   });
+
+
+  const [availableTrains, setavailableTrains] = useState([]);
+
+  useEffect(() => {
+    // Fetch station data from the backend when the component mounts
+
+    fetch('http://localhost:8800/api/available-trains',{
+      method:"GET",
+    })
+    .then(response => response.json())
+      .then((data)=>{
+        console.log(data, "availableTrainData" )
+        setavailableTrains(data);
+      })
+      // .catch(error => console.error(error));
+  }, []);
   const [showBookTrainForm, setShowBookTrainForm] = useState(false);
-  const [showTrackTrainForm, setShowTrackTrainForm] = useState(false);
 
-  const headers = ['Train Reference','Train', 'Available Seats', 'From Station', 'To Station', 'Date', 'Start Time', 'Reach Time'];
-   
+  const currentDate = new Date();
+  const headers = ['Train Reference','Train', 'Available Seats', 'From Station', 'To Station', 'Date', 'Start Time', 'Reach Time','Price'];
 
-  const currentDate = new Date(); 
+  const tableData = availableTrains.map((availableTrain) => ({
+    // 'Station Reference':station._id,
+    // Station: station.name,
+    // Location:station.location,
+    // Description: station.description
 
-    const tableData = trackTrains.map((trackTrain) => ({
-      'Train Reference': trackTrain.train,
-      Train: trackTrain.train ? trackTrain.train.name : 'no trains' ,
-      'Available Seats': trackTrain.train.capacity,
-      'From Station': trackTrain.startLocation,
-      'To Station': trackTrain.stopLocation,
-      Date: currentDate.toDateString(),
-      'Start Time': trackTrain.arrivalTime,
-      'Reach Time': trackTrain.departureTime,
-      EditButton: (
-        <Button key={`${trackTrain._id}-update`} variant="filled" color="blue" onClick={() => setShowTrackTrainForm(true)}>
-          Track Train
-        </Button>
-      ),
-      DeleteButton: (
-        <Button key={`${trackTrain._id}-delete`} variant="filled" color="blue" onClick={() => setShowBookTrainForm(true)}>
-          Book Train
-        </Button>
-      ),
-    }));
+    'Train Reference':0,
+    // Train:availableTrain.train.name, 
+    // 'Available Seats':availableTrain.train.capacity, 
+    'From Station':availableTrain.startLocation,  
+    'To Station':availableTrain.stopLocation, 
+    'Date':currentDate.toISOString().split('T')[0],
+    'Start Time':availableTrain.startTime,
+    'Reach Time':availableTrain.reachTime,
+    'Price':availableTrain.price
+  }));  
+    // const data = [
+    //   { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura', Date:'10-12-2023', 'Start Time':'12.00pm', 'Reach Time':'3.00pm'},
+    //   { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura', Date:'10-12-2023', 'Start Time':'12.00pm', 'Reach Time':'3.00pm' },
+    //   { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura', Date:'10-12-2023', 'Start Time':'12.00pm', 'Reach Time':'3.00pm' },
+    //   { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura', Date:'10-12-2023', 'Start Time':'12.00pm', 'Reach Time':'3.00pm' },
+    //   // Add more data objects as needed
+    // ];
     const btns = [
       <div style={{display: "flex", gap:"10px"}}><Button variant="filled" color="gray">Track Train</Button>
-        <Button variant="filled" color="green" onClick={() => setShowBookTrainForm(true)}>Book Train</Button></div>
+          
+        <Link to="/booktrain"><Button variant="filled" color="green" >Book Train</Button></Link></div>
         
       ];
       const handleCancelBookTrain = () => {
@@ -115,6 +132,14 @@ function UserProfile() {
       const handleCancelTrackTrain = () => {
         setShowTrackTrainForm(false);
       };
+
+
+
+
+
+
+
+
 
 
   return (
@@ -229,6 +254,7 @@ function UserProfile() {
             <h2 className='title'>{title2}</h2>
             <CustomTable headers={headers}
                         data={tableData}
+                        buttonComponents={btns}
                         />
                         {showBookTrainForm && (
                     <div className="update-form-overlay">
@@ -249,4 +275,6 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+
+
+export default BookSeat;

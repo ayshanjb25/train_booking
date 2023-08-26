@@ -1,15 +1,15 @@
 import React from "react";
-import { createStyles, Container, Paper, TextInput, Button } from "@mantine/core";
-import { IconSquareX } from "@tabler/icons-react";
+import { createStyles, Container, Paper,  Button } from "@mantine/core";
+// import { IconSquareX } from "@tabler/icons-react";
 
-const useStyles = createStyles(() => ({
-  blurredBackground: {
-    filter: "blur(2px)",
-  },
-}));
+// const useStyles = createStyles(() => ({
+//   blurredBackground: {
+//     filter: "blur(2px)",
+//   },
+// }));
 
 function DeleteForm(props) {
-  const { classes } = useStyles();
+  // const { classes } = useStyles();
 
   const handleCancel = () => {
     props.onClose();

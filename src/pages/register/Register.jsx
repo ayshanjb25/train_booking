@@ -8,8 +8,6 @@ import {
     Checkbox,
     Button,
     Title,
-    Text,
-    Anchor,
     rem,
     Textarea,
   } from '@mantine/core';
@@ -17,6 +15,7 @@ import { alignProperty } from '@mui/material/styles/cssUtils';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { RegisterContext } from '../../context/RegisterContext';
+import useFetch from '../../hooks/useFetch';
    
   const useStyles = createStyles((theme) => ({
     // wrapper: {
@@ -53,30 +52,41 @@ import { RegisterContext } from '../../context/RegisterContext';
   
   export function Register() {
     const { classes } = useStyles();
+    const { fetchData, data: fetchResult, loading: fetchLoading, error: fetchError } = useFetch('http://localhost:8800/api/auth/register');
+
+    const [userData, setUserData] = useState({
+      firstname:'',
+      lastname:'',
+      mobile:'',
+      nic:'',
+      address:'',
+      email:'',
+      password:'',
+    });
+   
+    const { dispatch } = useFetch();
+
+    const {user,loading, error} = useContext(RegisterContext);
   
-    const handleSubmit = async (event) => {
-
-      event.preventDefault();
-
-    const formData = {
-      firstname: event.target.elements.firstname.value,
-      lastname: event.target.elements.lastname.value,
-      mobile: event.target.elements.mobile.value,
-      nic: event.target.elements.nic.value,
-      address: event.target.elements.address.value,
-      email: event.target.elements.email.value,
-      password: event.target.elements.password.value,
-      userRole: event.target.elements.userRole.value,
-    };
-
-    try {
-      const response = await axios.post('http://localhost:8800/api/auth/register', formData);
-      console.log('User added successfully:', response.data);
-      console.log(formData)
-      //fetchStations(); // Fetch stations again to update the list
-    } catch (error) {
-      console.error('Error adding user:', error);
+      const navigate = useNavigate();
+  
+    const handleChange = (e)=>{
+      setUserData((prev)=>({...prev, [e.target.id]:e.target.value}))
     }
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const res = await axios.post('http://localhost:8800/api/auth/register', userData);
+        // const response = await registerUser(userData);
+        dispatch({ type: 'REGISTER_SUCCESS', payload: res.data.user });
+        navigate('/login');
+        // Redirect or show success message
+      } catch (err) {
+        // Handle error (you can display an error message)
+        // console.error(err);
+        dispatch({type:"REGISTER_FAILURE", payload:err.response.data});
+      }
     };
     
 
@@ -85,7 +95,7 @@ import { RegisterContext } from '../../context/RegisterContext';
       <div className={classes.wrapper}>
         <Paper className={classes.form} radius={0} p={30}>
           <Title order={2} className={classes.title} ta="center" mt="md" mb={50}>
-            Register for Book Your Train!
+            Register for BookMyTrain!
           </Title>
   <form onSubmit={handleSubmit}>
           <TextInput label="First Name" name="firstname" placeholder="Enter your First name" size="md" style={{ width: '400px' }} />

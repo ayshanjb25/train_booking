@@ -27,6 +27,7 @@
     "react-dom": "^18.2.0",
     "react-map-gl": "^7.1.5",
     "react-router-dom": "^6.14.2",
+    "react-to-print": "^2.14.13",
     "sass": "^1.63.6",
     "web-vitals": "^2.1.4"
   },
