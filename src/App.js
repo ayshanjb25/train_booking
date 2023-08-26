@@ -48,6 +48,7 @@ function App() {
           {/* <Route path="login" element={<Login />} /> */}
           {/* <Route path="admin" element={<AdminUser/>}/> */}
           <Route path="admin-profile" element={<AdminProfile/>}/>
+          <Route path="passengertravelhistory" element={<PassengerTravelHistory/>}/>
           
           <Route path="/login" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>

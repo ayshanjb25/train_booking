@@ -40,7 +40,7 @@ const PassengerSidebar = () => {
                     </li>
                     <li>
                         <CreditCardOutlinedIcon className='icon'/>
-                        <Link className='link' to="/passengerInfo">Booking History</Link>
+                        <Link className='link' to="/passengertravelhistory">Booking History</Link>
                     </li>
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>
