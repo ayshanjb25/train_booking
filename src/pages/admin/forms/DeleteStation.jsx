@@ -47,32 +47,14 @@ function DeleteStation({ title, selectedStation, onDelete, onClose }) {
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <Container size="sm">
         <Paper style={{ padding: "30px", width: "400px",  }}>
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "10vh" }}>
+          <div style={{ display: "flex", flexDirection:'column', marginBottom:'20px',justifyContent: "center", alignItems: "center", height: "10vh" }}>
             <h2 style={{ flex: 1, textAlign: "center" }}>Delete Station</h2>
+            <h4>Station : </h4><p>{selectedStation.name}</p>
           </div>
           <form>
             
             <p>Are you sure you want to delete this record?</p>
-            {/* <TextInput
-              label="Name"
-              style={{ marginTop: "20px" }}
-              labelProps={{ style: { marginBottom: "5px" } }}
-            />
-            <TextInput
-              label="NIC"
-              style={{ marginTop: "20px" }}
-              labelProps={{ style: { marginBottom: "5px" } }}
-            />
-            <TextInput
-              label="Email"
-              style={{ marginTop: "20px" }}
-              labelProps={{ style: { marginBottom: "5px" } }}
-            />
-            <TextInput
-              label="Mobile"
-              style={{ marginTop: "20px" }}
-              labelProps={{ style: { marginBottom: "5px" } }}
-            /> */}
+            
             
             <div style={{ display: "flex", justifyContent: "center", marginTop: "30px", gap: "10px"}} >
               <Button variant="filled" color="gray" style={{ flex: 0.5,fontSize: "14px", padding: "8px 16px" }} onClick={handleCancel}>

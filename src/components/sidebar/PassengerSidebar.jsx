@@ -18,20 +18,21 @@ const PassengerSidebar = () => {
     return (
         <div className='sidebar'>
             <div className='top'>
-                <span className="logo">Book Your Train</span>
+                <span className="logo">BookMyTrain</span>
                 </div>
             <hr/>
             <div className='center'>
-                <ul>
-                    <p className="title">MAIN</p>
+                <ul style={{marginLeft:'10px'}}>
+                    <p className="title" style={{marginTop:'30px'}}>MAIN</p>
                     <li>
                         <DashboardIcon className='icon'/>
-                        <span  className='link'>Dashboard</span>
+                        <Link  className='link' to="/">Dashboard</Link>
                     </li>
-                    <p className="title">LISTS</p>
+                    <p className="title" style={{marginTop:'30px'}}>LISTS</p>
+                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                     <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
-                        <Link className='link' to="/book">Book Seats</Link>
+                        <Link className='link' to="/bookseat">Book Seats</Link>
                     </li>
                     <li>
                         <ShoppingCartOutlinedIcon className='icon'/>
@@ -40,10 +41,6 @@ const PassengerSidebar = () => {
                     <li>
                         <CreditCardOutlinedIcon className='icon'/>
                         <Link className='link' to="/passengerInfo">Booking History</Link>
-                    </li>
-                    <li>
-                        <LocalShippingOutlinedIcon className='icon'/>
-                        <Link className='link' to="/book">Cart</Link>
                     </li>
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>
@@ -56,7 +53,7 @@ const PassengerSidebar = () => {
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>
                         <Link className='link' to="/book">Preferences</Link>
-                    </li>
+                    </li></div>
                     {/* <p className="title">USEFUL</p>
                     <li>
                         <StackedBarChartOutlinedIcon className='icon'/>
@@ -79,7 +76,8 @@ const PassengerSidebar = () => {
                         <SettingsOutlinedIcon className='icon'/>
                         <span>Settings</span>
                     </li> */}
-                    <p className="title">USER</p>
+                    <p className="title" style={{marginTop:'30px'}}>USER</p>
+                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                     <li>
                         <AccountCircleOutlinedIcon className='icon'/>  
                         <Link className='link' to="/user">Profile</Link>
@@ -87,7 +85,7 @@ const PassengerSidebar = () => {
                     <li>
                         <LogoutOutlinedIcon className='icon'/>
                         <Link className='link' to="/login">Logout</Link>
-                    </li>
+                    </li></div>
                 </ul>
             </div>
             {/* <div className='bottom'>

@@ -13,12 +13,27 @@ function Station() {
   const [stations, setStations] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredStations, setFilteredStations] = useState([]);
+
 
 
   // to fetch stations details to table
   useEffect(() => {
     fetchStations();
   }, []);
+
+
+  useEffect(() => {
+    // Filter stations based on search query
+    const filtered = stations.filter(station =>
+      station.name && station.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredStations(filtered);
+  }, [searchQuery, stations]);
+
+
+
 
   const fetchStations = async () => {
     try {
@@ -182,7 +197,13 @@ const [showDeleteForm, setShowDeleteForm] = useState(false);
                   {title}
                 </h2>
                 <div style={{ flex: 1 }}>
-                  <InputWithButton placeholder="Search Stations" />
+                   <InputWithButton
+                      placeholder="Search Stations"
+                      value={searchQuery}
+                      onChange={(event) => setSearchQuery(event.target.value)}
+                      // Add a click handler to clear search
+                      onButtonClick={() => setSearchQuery('')}
+                    />
                 </div>
               </div>
               {loading ? (

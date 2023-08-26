@@ -2,10 +2,7 @@ import React from 'react'
 import './sidebar.scss'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import StackedBarChartOutlinedIcon from '@mui/icons-material/StackedBarChartOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
@@ -20,13 +17,16 @@ const AdminSidebar = () => {
             <div className='top'><span className="logo">BookMyTrain</span></div>
             <hr/>
             <div className='center'>
-                <ul>
-                    <p className="title">MAIN</p>
+                <ul style={{marginLeft:'10px'}}>
+                    <p className="title" style={{marginTop:'30px'}}>MAIN</p>
+                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                     <li>
                         <DashboardIcon className='icon'/>
-                        <span className='link'>Dashboard</span>
+                        <Link className='link' to="/admin">Dashboard</Link>
                     </li>
-                    <p className="title">LISTS</p>
+                    </div>
+                    <p className="title" style={{marginTop:'30px'}}>LISTS</p>
+                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                     <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
                         <Link className='link' to="/admin/station">Station Details</Link>
@@ -39,36 +39,20 @@ const AdminSidebar = () => {
                         <PersonOutlineOutlinedIcon className='icon'/>
                         <Link className='link' to="/admin/users">User Details</Link>
                     </li>
+                    
+                    </div>
+                    <p className="title" style={{marginTop:'30px'}}>PASSENGER MANAGEMENT</p>
+                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                     <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
                         <Link className='link' to="/admin/passenger">Passenger Details</Link>
                     </li>
-                    {/* <li>
-                        <PersonOutlineOutlinedIcon className='icon'/>
-                        <span>Passenger Details</span>
-                    </li>
-                    <li>
-                        <ShoppingCartOutlinedIcon className='icon'/>
-                        <span>Products</span>
-                    </li>
-                    <li>
-                        <CreditCardOutlinedIcon className='icon'/>
-                        <span>Orders</span>
-                    </li>
-                    <li>
-                        <LocalShippingOutlinedIcon className='icon'/>
-                        <span>Delivery</span>
-                    </li> */}
-                    <p className="title">PASSENGER MANAGEMENT</p>
-                    <li>
-                        <StackedBarChartOutlinedIcon className='icon'/>
-                        <Link className='link' to="/admin/passenger-info">Passenger</Link>
-                    </li>
                     <li>
                         <NotificationsNoneOutlinedIcon className='icon'/>
                         <Link className='link' to="/admin/passengertravelhistory">Travel History</Link>
-                    </li>
-                    <p className="title">SERVICE</p>
+                    </li></div>
+                    <p className="title" style={{marginTop:'30px'}}>SERVICE</p>
+                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                     <li>
                         <SettingsSystemDaydreamOutlinedIcon className='icon'/>
                         <span className='link'>Discount</span>
@@ -91,8 +75,9 @@ const AdminSidebar = () => {
                     <li>
                         <SettingsOutlinedIcon className='icon'/>
                         <span className='link'>Settings</span>
-                    </li>
-                    <p className="title">USER</p>
+                    </li></div>
+                    <p className="title" style={{marginTop:'30px'}}>USER</p>
+                    <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
                     <li>
                         <AccountCircleOutlinedIcon className='icon'/>    
                         <Link className='link' to="/admin-profile">Profile</Link>
@@ -100,14 +85,8 @@ const AdminSidebar = () => {
                     <li>
                         <LogoutOutlinedIcon className='icon'/>
                         <Link className='link' to="/login">Logout</Link>
-                    </li>
+                    </li></div>
                 </ul>
-            </div>
-            <div className='bottom'>
-                <div className="colorOption"></div>
-                <div className="colorOption"></div>
-                <div className="colorOption"></div>
-                <div className="colorOption"></div>
             </div>
         </div>
     )

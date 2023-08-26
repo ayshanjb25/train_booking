@@ -1,14 +1,13 @@
 import React from 'react'; 
 import { CardSection, createStyles, rem } from '@mantine/core';
-import Card from '../../components/Card';
-import AdminSidebar from '../../components/sidebar/AdminSidebar';
 import Navbar from '../../components/navbar/Navbar';
-import { InputWithButton } from '../../components/SearchInput';
+import { IconCoin, IconChartBar, IconTicket,  IconTrain, IconClock } from '@tabler/icons-react';
 import CustomTable from '../../components/table/Table';
 import StatsSection from '../../components/Card';
-import { IconCoin, IconUser, IconTicket, IconChartBar } from '@tabler/icons-react';
+import PassengerSidebar from '../../components/sidebar/PassengerSidebar';
+import { PromotionCard } from '../../components/PromotionCard';
 
-const title= 'title';
+const title= 'Travel History';
 
 const useStyles = createStyles((theme) => ({
   progressBar: {
@@ -20,45 +19,46 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function AdminDashboard({ data }) {
+export function PassengerDashboard({ data }) {
   const { classes, theme } = useStyles();
 
 
   const headers = ['id','name'];
   const tableData = [{'id':'123','name':'aisha'},{'id':'123','name':'aisha'},{'id':'123','name':'aisha'},{'id':'123','name':'aisha'}];
+
   const icons = {
-    user: IconUser,
-    discount: IconChartBar,
+    time: IconClock,
+    km: IconTrain,
     ticket: IconTicket,
     coin: IconCoin,
+    discount: IconChartBar,
   };
- 
 
   return (
     <div>
       <div className="form">
-        <AdminSidebar />
+        <PassengerSidebar />
         <div className="container">
           <Navbar />
           <div className="formContainer">
-            <h2>Train Management</h2>
+            <h2>Summary</h2>
             <div style={{display:'flex',flexDirection:'row', justifyContent:'space-around',padding:'0px'}}>
             <StatsSection
-              title="tICKETS sold"
+              title="tICKETS bought"
               icon={icons.ticket}
-              value="10000"
+              value="6"
               diff="40"
             />
           <StatsSection
-              title="Total Passenger"
-              icon={icons.user}
-              value="1200"
+              title="Total Travel hours"
+              icon={icons.time}
+              value=" 2.5 hrs"
               diff="20"
             />
             <StatsSection
-              title="Total Users"
-              icon={icons.user}
-              value="20000"
+              title="Total Travel KM"
+              icon={icons.km}
+              value="20 km"
               diff="20"
             />
             
@@ -68,14 +68,26 @@ export function AdminDashboard({ data }) {
               value="60%"
               diff="60"
             />
-            <StatsSection
+            {/* <StatsSection
               title="Total revenue"
-              icon={icons.coin}
+              icon="fsdfsg"
               value="LKR 200,000"
               diff="123"
-            />
+            /> */}
             </div>
           </div>
+
+
+          <div className="formContainer">
+            <h2>Promotions</h2>
+            <div style={{display:'flex',flexDirection:'row', justifyContent:'space-around',gap:'30px',padding:'0px'}}>
+            <PromotionCard/>
+            <PromotionCard/>
+            <PromotionCard/>
+            <PromotionCard/>
+            </div>
+          </div>
+
 
           <div className="formContainer">
             <div style={{ flex: 1 }}>
@@ -89,9 +101,7 @@ export function AdminDashboard({ data }) {
                 <h2 className="title" style={{ flex: 3 }}>
                   {title}
                 </h2>
-                <div style={{ flex: 1 }}>
-                  <InputWithButton placeholder="Search Stations" />
-                </div>
+                
               </div>
               
                 <CustomTable
@@ -111,4 +121,4 @@ export function AdminDashboard({ data }) {
   );
 }
 
-export default AdminDashboard;
+export default PassengerDashboard;
