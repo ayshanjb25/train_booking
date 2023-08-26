@@ -26,6 +26,7 @@ import ViewTravelHistory from './pages/admin/forms/ViewTravelDetails'
 import ViewTravelHistoryForm from './pages/admin/forms/ViewTravelDetails'
 import Train from './pages/admin/Train'
 import AddUser from './pages/admin/AddUsers'
+import AdminDashboard from './pages/admin/AdminDashboard'
 
 
 function App() {
@@ -85,8 +86,10 @@ function App() {
         <Route path="admin-profile" element={<AdminProfile/>}/>
         <Route path="station" element={<Station/>}/>
         <Route path="train" element={<Train/>}/>
-          <Route path="passenger-info" element={<PassengerInfo/>}/>
+          <Route path="passenger" element={<PassengerInfo/>}/>
           <Route path="passengertravelhistory" element={<PassengerTravelHistory/>}/>
+          <Route path="users" element={<AddUser/>}/>
+          <Route path="admin-dashboard" element={<AdminDashboard/>}/>
 
 
 

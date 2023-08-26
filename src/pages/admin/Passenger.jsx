@@ -22,12 +22,59 @@ import {
 } from "@mantine/core";
 import axios from "axios";
 import CustomTable from "../../components/table/Table";
-import { InputWithButton } from "../../components/SearchInput";
-import UpdatePassengerForm from "./forms/UpdatePassenger";
-import DeleteForm from "./forms/delete";
-import AdminSidebar from "../../components/sidebar/AdminSidebar";
 
-// const title = "Account Information - Administrator";
+const title = "User Management - Add Users";
+
+const useStyles = createStyles((theme) => ({
+  // wrapper: {
+  //   minHeight: rem(900),
+  //   backgroundSize: 'cover',
+  //   backgroundImage:
+  //     'url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.visitsrilankatours.co.uk%2Ftrain-tickets-1.html&psig=AOvVaw116e0mMleolOccWKeOyrGb&ust=1691299295064000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOjGlIHjxIADFQAAAAAdAAAAABAd)',
+  // },
+
+  form: {
+    borderRight: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]
+    }`,
+    //   minHeight: rem(900),
+    //   maxWidth: rem(600),
+    //   paddingTop: rem(80),
+
+    [theme.fn.smallerThan("sm")]: {
+      maxWidth: "100%",
+    },
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  title: {
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+  },
+}));
+
+function PassengerInfo({userData}) {
+
+
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+    
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('http://localhost:8800/api/users');
+      setUsers(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      setLoading(false);
+    }
+  };
 
   const form = useForm({
     initialValues: {
@@ -110,38 +157,22 @@ import AdminSidebar from "../../components/sidebar/AdminSidebar";
 
  
 
-      return (
-        <div className="form">
-          <AdminSidebar />
-          <div className="container">
-            <Navbar />
-            <div className="formContainer">
-              <div style={{ display: "flex", flexDirection: "row", gap: "50px" }}>
-                {/* ... */}
-              </div>
-    
-              <div className="formContainer" style={{ border: "none", padding: "20px 10px 0px 10px", display: "flex", flexDirection: "row" }}>
-                <div>
-                  <div style={{ display: "flex", flexDirection: "row", marginBottom: "30px" }}>
-                    <h2 className="title" style={{ flex: 2 }}>
-                      Passenger Details
-                    </h2>
-                    <InputWithButton placeholder="Search Passenger" style={{ flex: 1 }} />
-                  </div>
-                  <CustomTable headers={headers} data={data} buttonComponents={btns} />
-                  {showUpdateForm && (
-                    <div className="update-form-overlay">
-                      <UpdatePassengerForm onClose={handleCancelUpdate} />
-                    </div>
-                  )}
-                  {showDeleteForm && (
-                    <div className="update-form-overlay">
-                      <DeleteForm onClose={handleCancelDelete} />
-                    </div>
-                  )}
-                </div>
-              </div>
-              {/* ... */}
+  return (
+    <div className="form">
+      <AdminSidebar />
+      <div className="container">
+        <Navbar />
+        
+
+
+        <div className='formContainer' style={{border:"none",padding:"20px 10px 0px 10px",display:"flex", flexDirection: "row"}}>
+
+            <div style={{flex:2}}>
+            <h2 className='title'>Passengers</h2>
+            <CustomTable headers={headers2}
+                        data={tableData}
+                        />
+
             </div>
             
             

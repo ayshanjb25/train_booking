@@ -33,7 +33,7 @@ export default function CustomTable({ headers, data, buttonComponents }) {
         <thead>
           <tr>
             {headers.map((header) => (
-              <th key={header}>{header}</th>
+              <th key={header}><h3>{header}</h3></th>
             ))}
             <th></th>
           </tr>
