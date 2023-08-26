@@ -13,6 +13,8 @@ import {
 } from "@mantine/form";
 import { Button, Group, TextInput, NumberInput, Textarea } from "@mantine/core";
 import CustomTable from "../../components/table/Table";
+import UpdateTrainForm from "./forms/UpdateTrain";
+import DeleteForm from "./forms/delete";
 // import AdminSidebar from "../../components/sidebar/AdminSidebar";
 
 // const title = "Account Information - Administrator";
@@ -78,7 +80,8 @@ function Train({trainData}) {
     setShowOriginalForm(true);
   };
 
-
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
 
 
   // const headers = ['Station Reference','Station', 'Location', 'Description'];
@@ -119,11 +122,16 @@ function Train({trainData}) {
 
 
       const btns =  [
-        <Button key={1} variant="filled" color="blue">Edit Train</Button>,
-        <Button key={1} variant="filled" color="red">Delete Train</Button>,
+        <Button key={1} variant="filled" color="blue" onClick={() => setShowUpdateForm(true)}>Edit Train</Button>,
+        <Button key={1} variant="filled" color="red" onClick={() => setShowDeleteForm(true)}>Delete Train</Button>,
       ];
 
-
+      const handleCancelUpdate = () => {
+        setShowUpdateForm(false);
+      };
+      const handleCancelDelete = () => {
+        setShowDeleteForm(false);
+      };
 
 
   return (
@@ -168,7 +176,8 @@ function Train({trainData}) {
                   {...form.getInputProps("username")}
                   
                 />
-
+                <div style={{marginTop:"20px", }}>
+                <Button variant="filled" color="blue">Add Train</Button></div>
                 
               </form>
             </div>
@@ -187,6 +196,16 @@ function Train({trainData}) {
                         data={tableData}
                         buttonComponents={btns}
                         />
+            {showUpdateForm && (
+                    <div className="update-form-overlay">
+                      <UpdateTrainForm onClose={handleCancelUpdate} />
+                    </div>
+                  )}
+                  {showDeleteForm && (
+                    <div className="update-form-overlay">
+                      <DeleteForm onClose={handleCancelDelete} />
+                    </div>
+                  )}
 
             </div>
             
