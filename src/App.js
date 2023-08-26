@@ -27,6 +27,7 @@ import ViewTravelHistoryForm from './pages/admin/forms/ViewTravelDetails'
 import Train from './pages/admin/Train'
 import AddUser from './pages/admin/AddUsers'
 import AdminDashboard from './pages/admin/AdminDashboard'
+import PassengerDashboard from './pages/admin/PassengerDashboard'
 import Discounts from './pages/admin/Discounts'
 import Loyalty from './pages/admin/Loyalty'
 
@@ -43,7 +44,7 @@ function App() {
 
         
         <Route path="/">
-          <Route index element={<BookSeat />} />
+          <Route index element={<PassengerDashboard />} />
           {/* <Route path="login" element={<Login />} /> */}
           {/* <Route path="admin" element={<AdminUser/>}/> */}
           <Route path="admin-profile" element={<AdminProfile/>}/>
@@ -71,6 +72,7 @@ function App() {
             
 
           </Route>
+          <Route path="bookseat" element={<BookSeat/>}/>
           <Route path="booktrain" element={<BookTrainForm/>}/>
           <Route index element={<Home />} />
         {/* <Route
@@ -84,7 +86,7 @@ function App() {
         /> */}
         </Route>
         <Route path="/admin">
-        <Route index element={<AdminProfile />} />
+        <Route index element={<AdminDashboard />} />
         <Route path="admin-profile" element={<AdminProfile/>}/>
         <Route path="station" element={<Station/>}/>
         <Route path="train" element={<Train/>}/>
@@ -94,7 +96,6 @@ function App() {
           <Route path="admin-dashboard" element={<AdminDashboard/>}/>
           <Route path="discounts" element={<Discounts/>}/>
           <Route path="loyalty" element={<Loyalty/>}/>
-          <Route path="admin-dashboard" element={<AdminDashboard/>}/>
 
 
 
