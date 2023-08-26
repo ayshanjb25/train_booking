@@ -53,45 +53,32 @@ import { RegisterContext } from '../../context/RegisterContext';
   
   export function Register() {
     const { classes } = useStyles();
+  
+    const handleSubmit = async (event) => {
 
-    const [userData, setUserData] = useState({
-      firstname:'',
-      lastname:'',
-      mobile:'',
-      nic:'',
-      address:'',
-      email:'',
-      password:'',
-    });
-   
-  
-    const {user,loading, error, dispatch} = useContext(RegisterContext);
-  
-      const navigate = useNavigate();
-  
-    const handleChange = (e)=>{
-      setUserData((prev)=>({...prev, [e.target.id]:e.target.value}))
+      event.preventDefault();
+
+    const formData = {
+      firstname: event.target.elements.firstname.value,
+      lastname: event.target.elements.lastname.value,
+      mobile: event.target.elements.mobile.value,
+      nic: event.target.elements.nic.value,
+      address: event.target.elements.address.value,
+      email: event.target.elements.email.value,
+      password: event.target.elements.password.value,
+      userRole: event.target.elements.userRole.value,
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8800/api/auth/register', formData);
+      console.log('User added successfully:', response.data);
+      console.log(formData)
+      //fetchStations(); // Fetch stations again to update the list
+    } catch (error) {
+      console.error('Error adding user:', error);
     }
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const res = await axios.post("/auth/register", userData);
-        // const response = await registerUser(userData);
-        dispatch({ type: 'REGISTER_SUCCESS', payload: res.data.user });
-        navigate('/login');
-        // Redirect or show success message
-      } catch (err) {
-        // Handle error (you can display an error message)
-        // console.error(err);
-        dispatch({type:"REGISTER_FAILURE", payload:err.response.data});
-      }
     };
     
-
-
-
-
 
 
     return (
@@ -101,8 +88,8 @@ import { RegisterContext } from '../../context/RegisterContext';
             Register for Book Your Train!
           </Title>
   <form onSubmit={handleSubmit}>
-          <TextInput label="First Name" id="firstname" placeholder="Enter your First name" size="md" style={{ width: '400px' }} onChange={handleChange}/>
-          <TextInput label="Last Name" id="lastname" placeholder="Enter your Last name" size="md" style={{ width: '400px' }} onChange={handleChange}/>
+          <TextInput label="First Name" name="firstname" placeholder="Enter your First name" size="md" style={{ width: '400px' }} />
+          <TextInput label="Last Name" name="lastname" placeholder="Enter your Last name" size="md" style={{ width: '400px' }} />
           <div style={{ display: 'flex', gap: '16px', marginTop: '16px' }}>
             <p style={{marginRight:"30px"}}>Title</p>
             <Checkbox label="Mr" size="md" />
@@ -110,12 +97,13 @@ import { RegisterContext } from '../../context/RegisterContext';
             <Checkbox label="Ms" size="md" />
             <Checkbox label="Rev" size="md" />
           </div>
-          <Textarea label="Address" id="address" placeholder="Enter your address here" size="md" style={{ width: '400px' }} onChange={handleChange}/>
-          <TextInput label="Email address" id="email" placeholder="Enter your Email" mt="md" size="md" style={{ width: '400px' }} onChange={handleChange}/>
-          <TextInput label="NIC" id="nic" placeholder="Enter your NIC" mt="md" size="md" style={{ width: '400px' }} onChange={handleChange}/>
-          <TextInput label="Mobile Number" id="mobile" placeholder="+94xxxxxxxxx" mt="md" size="md" style={{ width: '400px' }} onChange={handleChange}/>
-          <PasswordInput label="Password" placeholder="Enter password" mt="md" size="md" style={{ width: '400px' }} onChange={handleChange}/>
-          <PasswordInput label="Confirm Password" id="password" placeholder="Confirm password" mt="md" size="md" style={{ width: '400px' }} onChange={handleChange}/>
+          <Textarea label="Address" name="address" placeholder="Enter your address here" size="md" style={{ width: '400px' }} />
+          <TextInput label="Email address" name="email" placeholder="Enter your Email" mt="md" size="md" style={{ width: '400px' }} />
+          <TextInput label="NIC" name="nic" placeholder="Enter your NIC" mt="md" size="md" style={{ width: '400px' }} />
+          <TextInput label="Mobile Number" name="mobile" placeholder="+94xxxxxxxxx" mt="md" size="md" style={{ width: '400px' }} />
+          <PasswordInput label="Password" placeholder="Enter password" mt="md" size="md" style={{ width: '400px' }} />
+          <PasswordInput label="Confirm Password" name="password" placeholder="Confirm password" mt="md" size="md" style={{ width: '400px' }} />
+          <TextInput name="userRole" value="passenger" mt="md" size="md" style={{ width: '400px', display: 'none' }} disabled/>
           <Button type="submit" fullWidth mt="xl" size="md" style={{ width: '400px' }}>
             Create Account
           </Button></form>

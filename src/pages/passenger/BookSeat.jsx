@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import PassengerSidebar from '../../components/sidebar/PassengerSidebar'
 import QtyInput from '../../components/QtyInput'
 import Navbar from '../../components/navbar/Navbar'
@@ -8,6 +8,8 @@ import { useForm, isNotEmpty, isEmail, isInRange, hasLength, matches } from '@ma
 import { createStyles, rem, Select, Button, Group, TextInput} from '@mantine/core';
 import CustomTable from '../../components/table/Table';
 import BookTrainForm from './forms/BookTrain';
+import axios from 'axios'; 
+import TrackTrain from './forms/TrackTrain';
 
 const title= "Book your seat"
 const title2= "Available Trains"
@@ -35,6 +37,24 @@ const useStyles = createStyles((theme) => ({
   
 function UserProfile() {
     const { classes } = useStyles();
+    const [trackTrains, setTrackTrains] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+      fetchTrackTrains();
+    }, []);
+  
+    const fetchTrackTrains = async () => {
+      try {
+        const response = await axios.get('http://localhost:8800/api/track-trains');
+        setTrackTrains(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching stations:', error);
+        setLoading(false);
+      }
+    };
 
   const form = useForm({
     initialValues: {
@@ -57,16 +77,33 @@ function UserProfile() {
     
   });
   const [showBookTrainForm, setShowBookTrainForm] = useState(false);
-
+  const [showTrackTrainForm, setShowTrackTrainForm] = useState(false);
 
   const headers = ['Train Reference','Train', 'Available Seats', 'From Station', 'To Station', 'Date', 'Start Time', 'Reach Time'];
-    const data = [
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura', Date:'10-12-2023', 'Start Time':'12.00pm', 'Reach Time':'3.00pm'},
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura', Date:'10-12-2023', 'Start Time':'12.00pm', 'Reach Time':'3.00pm' },
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura', Date:'10-12-2023', 'Start Time':'12.00pm', 'Reach Time':'3.00pm' },
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura', Date:'10-12-2023', 'Start Time':'12.00pm', 'Reach Time':'3.00pm' },
-      // Add more data objects as needed
-    ];
+   
+
+  const currentDate = new Date(); 
+
+    const tableData = trackTrains.map((trackTrain) => ({
+      'Train Reference': trackTrain.train,
+      Train: trackTrain.train ? trackTrain.train.name : 'no trains' ,
+      'Available Seats': trackTrain.train.capacity,
+      'From Station': trackTrain.startLocation,
+      'To Station': trackTrain.stopLocation,
+      Date: currentDate.toDateString(),
+      'Start Time': trackTrain.arrivalTime,
+      'Reach Time': trackTrain.departureTime,
+      EditButton: (
+        <Button key={`${trackTrain._id}-update`} variant="filled" color="blue" onClick={() => setShowTrackTrainForm(true)}>
+          Track Train
+        </Button>
+      ),
+      DeleteButton: (
+        <Button key={`${trackTrain._id}-delete`} variant="filled" color="blue" onClick={() => setShowBookTrainForm(true)}>
+          Book Train
+        </Button>
+      ),
+    }));
     const btns = [
       <div style={{display: "flex", gap:"10px"}}><Button variant="filled" color="gray">Track Train</Button>
         <Button variant="filled" color="green" onClick={() => setShowBookTrainForm(true)}>Book Train</Button></div>
@@ -74,6 +111,9 @@ function UserProfile() {
       ];
       const handleCancelBookTrain = () => {
         setShowBookTrainForm(false);
+      };
+      const handleCancelTrackTrain = () => {
+        setShowTrackTrainForm(false);
       };
 
 
@@ -83,12 +123,13 @@ function UserProfile() {
         <div className="container">
           <Navbar/>
             <div className="formContainer" style={{display:"flex", flexDirection:"row"}}>
-              
+            
               <div className="bookingDiv" style={{flex:1}}>
                 <div className="content"><h2 className='title'>{title}</h2>
                 <p>You can book both ways</p></div>
                 
               </div>
+              
                 <div  style={{flex:2}}>
                 <form component="form" maw={400} mx="auto" onSubmit={form.onSubmit(() => {})}>
 
@@ -183,17 +224,21 @@ function UserProfile() {
               
               
             </div>
-            
 
             <div className='formContainer' style={{border:"none",padding:"20px 10px 0px 10px", flexDirection: "column"}}>
             <h2 className='title'>{title2}</h2>
             <CustomTable headers={headers}
-                        data={data}
-                        buttonComponents={btns}
+                        data={tableData}
                         />
                         {showBookTrainForm && (
                     <div className="update-form-overlay">
                       <BookTrainForm onClose={handleCancelBookTrain} />
+                    </div>
+                  )}
+
+{showTrackTrainForm && (
+                    <div className="update-form-overlay">
+                      <TrackTrain onClose={handleCancelTrackTrain} />
                     </div>
                   )}
             </div>
@@ -203,177 +248,5 @@ function UserProfile() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const title= "Account Information - Passenger"
-// const User = () => {
-//   const [formData, setFormData] = useState({
-//     name: '',
-//     email: '',
-//     password: '',
-//   });
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // Perform form submission logic here, such as sending the data to an API
-//     console.log(formData);
-//     // Reset the form
-//     setFormData({
-//       name: '',
-//       email: '',
-//       password: '',
-//     });
-//   };
-
-//   return (
-
-//     <div className='form'>
-//             <Sidebar/>
-//             <div className="container">
-//                 <Navbar/>
-//               <div className="formContainer">
-//                 <div>
-//                   <img src="https://www.news.lk/media/k2/items/cache/9ae1b773f33191448481aaddfbbcbf85_XL.jpg" alt="" />
-//                 </div>
-//                 <h2 className='title'>{title}</h2>
-                
-//                 <div className="form">
-                  
-//                   <form onSubmit={handleSubmit}>
-//                       <div className="formItem">
-//                           <label htmlFor="username">User Name:</label>
-//                           <input
-//                           type="text"
-//                           id="username"
-//                           name="username"
-//                           value={formData.username}
-//                           onChange={handleChange}
-//                           disabled
-//                           />
-//                       </div>
-                      
-//                       <div  style={{display:"flex", gap:"50px"}}>
-//                           <div className="formItem">
-//                             <label htmlFor="fname">First Name:</label>
-//                           <input
-//                           type="text"
-//                           id="fname"
-//                           name="fname"
-//                           value={formData.fname}
-//                           onChange={handleChange}
-//                           />
-//                           </div>
-//                           <div className="formItem">
-//                           <label htmlFor="lame">Last Name:</label>
-//                           <input
-//                           type="text"
-//                           id="lname"
-//                           name="lname"
-//                           value={formData.lname}
-//                           onChange={handleChange}
-//                           />
-//                           </div>
-//                       </div>
-//                       <div className="formItem">
-//                           <label htmlFor="email">Email:</label>
-//                           <input
-//                           type="email"
-//                           id="email"
-//                           name="email"
-//                           value={formData.email}
-//                           onChange={handleChange}
-//                           disabled
-//                           />
-//                       </div>
-//                       <div className="formItem">
-//                           <label htmlFor="password">Password:</label>
-//                           <input
-//                           type="password"
-//                           id="password"
-//                           name="password"
-//                           value={formData.password}
-//                           onChange={handleChange}
-//                           />
-//                       </div>
-
-//                       <div className="formItem">
-//                           <label htmlFor="mobile">Mobile No:</label>
-//                           <input
-//                           type="text"
-//                           id="mobile"
-//                           name="mobile"
-//                           value={formData.mobile}
-//                           onChange={handleChange}
-//                           />
-//                           </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-//                   <div className='passwordReset'>
-//                     <h3>Reset Existing Password</h3>
-//                     <p>To reset your password you should provide your existing password and then we will update your new password to our system </p>
-//                     <button className="btn2">Reset Password</button>
-//                   </div>
-  
-  
-  
-  
-//                     <div className='btns'>
-//                     <button type="submit" className="btn1">Reset</button>
-//                     <button type="submit" className="btn2">Submit</button>
-//                     </div>
-                      
-//                   </form>
-                      
-//                   </div>
-                  
-//                 </div>
-                
-//             </div>
-//         </div>
-
-
-    
-//   );
-// };
 
 export default UserProfile;

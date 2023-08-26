@@ -17,14 +17,16 @@ import { Link } from 'react-router-dom';
 const AdminSidebar = () => {
     return (
         <div className='sidebar'>
-            <div className='top'><span className="logo">Book Your Train</span></div>
+            <div className='top'>
+                <span className="logo">Book Your Train</span>
+                </div>
             <hr/>
             <div className='center'>
                 <ul>
                     <p className="title">MAIN</p>
                     <li>
                         <DashboardIcon className='icon'/>
-                        <span>Dashboard</span>
+                        <span className='link'>Dashboard</span>
                     </li>
                     <p className="title">LISTS</p>
                     <li>
@@ -34,6 +36,14 @@ const AdminSidebar = () => {
                     <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
                         <Link className='link' to="/admin/train">Train Details</Link>
+                    </li>
+                    <li>
+                        <PersonOutlineOutlinedIcon className='icon'/>
+                        <Link className='link' to="/admin/users">User Details</Link>
+                    </li>
+                    <li>
+                        <PersonOutlineOutlinedIcon className='icon'/>
+                        <Link className='link' to="/admin/passenger">Passenger Details</Link>
                     </li>
                     {/* <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
@@ -54,35 +64,35 @@ const AdminSidebar = () => {
                     <p className="title">REVENUE MANAGEMENT</p>
                     <li>
                         <StackedBarChartOutlinedIcon className='icon'/>
-                        <span>Ticket Sales</span>
+                        <span className='link'>Ticket Sales</span>
                     </li>
                     <li>
                         <NotificationsNoneOutlinedIcon className='icon'/>
-                        <span>Promotions</span>
+                        <span className='link'>Promotions</span>
                     </li>
                     <p className="title">SERVICE</p>
                     <li>
                         <SettingsSystemDaydreamOutlinedIcon className='icon'/>
-                        <span>Discount</span>
+                        <span className='link'>Discount</span>
                         
                     </li>
                     <li>
                         <SettingsSystemDaydreamOutlinedIcon className='icon'/>
-                        <span>Revenue</span>
+                        <span className='link'>Revenue</span>
                         
                     </li>
                     <li>
                         <SettingsSystemDaydreamOutlinedIcon className='icon'/>
-                        <span>Expenses</span>
+                        <span className='link'>Expenses</span>
                         
                     </li>
                     <li>
                         <PsychologyOutlinedIcon className='icon'/>
-                        <span>Logs</span>
+                        <span className='link'>Logs</span>
                     </li>
                     <li>
                         <SettingsOutlinedIcon className='icon'/>
-                        <span>Settings</span>
+                        <span className='link'>Settings</span>
                     </li>
                     <p className="title">USER</p>
                     <li>

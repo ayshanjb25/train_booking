@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import PassengerSidebar from "../../components/sidebar/PassengerSidebar";
+import React, { useEffect, useState } from "react";
+import AdminSidebar from "../../components/sidebar/AdminSidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "../forms/user.scss";
-
 import {
   useForm,
   isNotEmpty,
@@ -11,15 +10,72 @@ import {
   hasLength,
   matches,
 } from "@mantine/form";
-import { Button, Group, TextInput, NumberInput, Textarea } from "@mantine/core";
+import {
+  Button,
+  Group,
+  TextInput,
+  createStyles,
+  rem,
+  Textarea,
+  PasswordInput,
+  Select,
+} from "@mantine/core";
+import axios from "axios";
 import CustomTable from "../../components/table/Table";
-import { InputWithButton } from "../../components/SearchInput";
-import UpdatePassengerForm from "./forms/UpdatePassenger";
-import DeleteForm from "./forms/delete";
 
-// const title = "Account Information - Administrator";
+const title = "User Management - Add Users";
 
-function PassengerInfo() {
+const useStyles = createStyles((theme) => ({
+  // wrapper: {
+  //   minHeight: rem(900),
+  //   backgroundSize: 'cover',
+  //   backgroundImage:
+  //     'url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.visitsrilankatours.co.uk%2Ftrain-tickets-1.html&psig=AOvVaw116e0mMleolOccWKeOyrGb&ust=1691299295064000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOjGlIHjxIADFQAAAAAdAAAAABAd)',
+  // },
+
+  form: {
+    borderRight: `${rem(1)} solid ${
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[3]
+    }`,
+    //   minHeight: rem(900),
+    //   maxWidth: rem(600),
+    //   paddingTop: rem(80),
+
+    [theme.fn.smallerThan("sm")]: {
+      maxWidth: "100%",
+    },
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+
+  title: {
+    color: theme.colorScheme === "dark" ? theme.white : theme.black,
+    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+  },
+}));
+
+function PassengerInfo({userData}) {
+
+
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+    
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('http://localhost:8800/api/users');
+      setUsers(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      setLoading(false);
+    }
+  };
+
   const form = useForm({
     initialValues: {
       username: "",
@@ -45,98 +101,87 @@ function PassengerInfo() {
       ),
     },
   });
+  const { classes } = useStyles();
 
-  const [showPasswordReset, setShowPasswordReset] = useState(false); // State to manage visibility
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const [showOriginalForm, setShowOriginalForm] = useState(true);
+    const formData = {
+      firstname: event.target.elements.firstname.value,
+      lastname: event.target.elements.lastname.value,
+      mobile: event.target.elements.mobile.value,
+      nic: event.target.elements.nic.value,
+      address: event.target.elements.address.value,
+      email: event.target.elements.email.value,
+      password: event.target.elements.password.value,
+      userRole: event.target.elements.userRole.value,
+    };
 
-
-  const handlePasswordResetClick = () => {
-    setShowPasswordReset(true);
-    setShowOriginalForm(false);
-  };
-
-  const handlePasswordResetCancel = () => {
-    setShowPasswordReset(false);
-    setShowOriginalForm(true);
-  };
-  const [showUpdateForm, setShowUpdateForm] = useState(false);
-  const [showDeleteForm, setShowDeleteForm] = useState(false);
-
-
-
-  const headers = ['Passenger ID','Passenger Name', 'NIC', 'Email', 'Mobile'];
-    const data = [
-      { 'Passenger ID': '1', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
-      { 'Passenger ID': '2', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
-      { 'Passenger ID': '3', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
-      { 'Passenger ID': '4', 'Passenger Name': 'A B Perera', NIC: '978552222V', Email:'ann@gmail.com', Mobile: '9477123456'},
-      // Add more data objects as needed
-    ];
-    const btns = [
-        <Button variant="filled" color="red" onClick={() => setShowDeleteForm(true)}>Delete</Button>,
-        <Button variant="filled" color="blue" onClick={() => setShowUpdateForm(true)}>Update</Button>,
-      ];
-
-
-      const headers2 = ['Train Reference','Train', 'Available Seats', 'From Station', 'To Station'];
-    const data2 = [
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura'},
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura' },
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura' },
-      { 'Train Reference': '1', Train: 'Colombo Express', 'Available Seats': 6, 'From Station': 'Colombo', 'To Station':'Anuradhapura' },
-      // Add more data objects as needed
-    ];
-    const btns2 = [
-        <Button variant="filled" color="gray">Track Train</Button>,
-      ];
-
-      const handleCancelUpdate = () => {
-        setShowUpdateForm(false);
-      };
-      const handleCancelDelete = () => {
-        setShowDeleteForm(false);
-      };
-
-
-
-      return (
-        <div className="form">
-          <PassengerSidebar />
-          <div className="container">
-            <Navbar />
-            <div className="formContainer">
-              <div style={{ display: "flex", flexDirection: "row", gap: "50px" }}>
-                {/* ... */}
-              </div>
-    
-              <div className="formContainer" style={{ border: "none", padding: "20px 10px 0px 10px", display: "flex", flexDirection: "row" }}>
-                <div>
-                  <div style={{ display: "flex", flexDirection: "row", marginBottom: "30px" }}>
-                    <h2 className="title" style={{ flex: 2 }}>
-                      Passenger Details
-                    </h2>
-                    <InputWithButton placeholder="Search Passenger" style={{ flex: 1 }} />
-                  </div>
-                  <CustomTable headers={headers} data={data} buttonComponents={btns} />
-                  {showUpdateForm && (
-                    <div className="update-form-overlay">
-                      <UpdatePassengerForm onClose={handleCancelUpdate} />
-                    </div>
-                  )}
-                  {showDeleteForm && (
-                    <div className="update-form-overlay">
-                      <DeleteForm onClose={handleCancelDelete} />
-                    </div>
-                  )}
-                </div>
-              </div>
-              {/* ... */}
-            </div>
-          </div>
-        </div>
+    try {
+      const response = await axios.post(
+        "http://localhost:8800/api/auth/register",
+        formData
       );
+      console.log("User added successfully:", response.data);
+      fetchUsers();
+      //fetchStations(); // Fetch stations again to update the list
+    } catch (error) {
+      console.error("Error adding user:", error);
     }
+  };
 
+
+  const headers2 = ['Passenger Reference','Full Name', 'NIC', 'Email','Mobile','Address' ];
+
+  const tableData = users
+  .filter((user) => (user.userRole == 'passenger' || user.userRole == 'Passenger' )) // Filter users with userRole 'admin'
+  .map((user) => ({
+    'Passenger Reference': user._id,
+    'Full Name': user.firstname + ' ' + user.lastname,
+    //'User Role': user.userRole,
+    NIC: user.nic,
+    Email: user.email,
+    Mobile: user.mobile,
+    Address: user.address,
+    EditButton: (
+      <Button key={`${user._id}-update`} variant="filled" color="blue">
+        Edit User
+      </Button>
+    ),
+    DeleteButton: (
+      <Button key={`${user._id}-delete`} variant="filled" color="red">
+        Delete User
+      </Button>
+    ),
+  })); 
+
+ 
+
+  return (
+    <div className="form">
+      <AdminSidebar />
+      <div className="container">
+        <Navbar />
+        
+
+
+        <div className='formContainer' style={{border:"none",padding:"20px 10px 0px 10px",display:"flex", flexDirection: "row"}}>
+
+            <div style={{flex:2}}>
+            <h2 className='title'>Passengers</h2>
+            <CustomTable headers={headers2}
+                        data={tableData}
+                        />
+
+            </div>
+            
+            
+            
+            
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default PassengerInfo;

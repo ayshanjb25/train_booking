@@ -25,6 +25,7 @@ import PassengerTravelHistory from './pages/admin/PassengerTravelHistory'
 import ViewTravelHistory from './pages/admin/forms/ViewTravelDetails'
 import ViewTravelHistoryForm from './pages/admin/forms/ViewTravelDetails'
 import Train from './pages/admin/Train'
+import AddUser from './pages/admin/AddUsers'
 
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
 
      <BrowserRouter>
         <Routes>
+
+        
         <Route path="/">
           <Route index element={<BookSeat />} />
           {/* <Route path="login" element={<Login />} /> */}
@@ -82,7 +85,8 @@ function App() {
         <Route path="admin-profile" element={<AdminProfile/>}/>
         <Route path="station" element={<Station/>}/>
         <Route path="train" element={<Train/>}/>
-          <Route path="passengerInfo" element={<PassengerInfo/>}/>
+          <Route path="passenger" element={<PassengerInfo/>}/>
+          <Route path="users" element={<AddUser/>}/>
 
 
 
