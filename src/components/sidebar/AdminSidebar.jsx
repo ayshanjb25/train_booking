@@ -24,7 +24,7 @@ const AdminSidebar = () => {
                     <p className="title">MAIN</p>
                     <li>
                         <DashboardIcon className='icon'/>
-                        <span>Dashboard</span>
+                        <span className='link'>Dashboard</span>
                     </li>
                     <p className="title">LISTS</p>
                     <li>
@@ -34,6 +34,14 @@ const AdminSidebar = () => {
                     <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
                         <Link className='link' to="/admin/train">Train Details</Link>
+                    </li>
+                    <li>
+                        <PersonOutlineOutlinedIcon className='icon'/>
+                        <Link className='link' to="/admin/users">User Details</Link>
+                    </li>
+                    <li>
+                        <PersonOutlineOutlinedIcon className='icon'/>
+                        <Link className='link' to="/admin/passenger">Passenger Details</Link>
                     </li>
                     {/* <li>
                         <PersonOutlineOutlinedIcon className='icon'/>
@@ -78,11 +86,11 @@ const AdminSidebar = () => {
                     </li>
                     <li>
                         <PsychologyOutlinedIcon className='icon'/>
-                        <span>Logs</span>
+                        <span className='link'>Logs</span>
                     </li>
                     <li>
                         <SettingsOutlinedIcon className='icon'/>
-                        <span>Settings</span>
+                        <span className='link'>Settings</span>
                     </li>
                     <p className="title">USER</p>
                     <li>

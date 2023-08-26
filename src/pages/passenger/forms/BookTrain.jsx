@@ -4,7 +4,7 @@ import Navbar from '../../../components/navbar/Navbar'
 import '../../forms/user.scss'
 
 import { useForm, isNotEmpty, isEmail, isInRange, hasLength, matches } from '@mantine/form';
-import { Button, Group, TextInput } from '@mantine/core';
+import { Button, Group, Paper, TextInput } from '@mantine/core';
 import QtyInput from '../../../components/QtyInput';
 
 
@@ -50,10 +50,10 @@ function BookTrain() {
   };
 
   return (
-    <div className='form'>
-      <PassengerSidebar/>
+    <Paper className='form'>
+      {/* <PassengerSidebar/> */}
         <div className="container">
-          <Navbar/>
+          {/* <Navbar/> */}
             <div className="formContainer">
               <div style={{display:"flex", flexDirection:"row", gap:"50px"}} >
               
@@ -143,7 +143,7 @@ function BookTrain() {
              
             </div>
         </div>
-    </div>
+    </Paper>
   );
 }
 

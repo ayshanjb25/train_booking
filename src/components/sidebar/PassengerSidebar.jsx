@@ -17,14 +17,16 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 const PassengerSidebar = () => {
     return (
         <div className='sidebar'>
-            <div className='top'><span className="logo">Book Your Train</span></div>
+            <div className='top'>
+                <span className="logo">Book Your Train</span>
+                </div>
             <hr/>
             <div className='center'>
                 <ul>
                     <p className="title">MAIN</p>
                     <li>
                         <DashboardIcon className='icon'/>
-                        <span>Dashboard</span>
+                        <span  className='link'>Dashboard</span>
                     </li>
                     <p className="title">LISTS</p>
                     <li>
@@ -88,12 +90,12 @@ const PassengerSidebar = () => {
                     </li>
                 </ul>
             </div>
-            <div className='bottom'>
+            {/* <div className='bottom'>
                 <div className="colorOption"></div>
                 <div className="colorOption"></div>
                 <div className="colorOption"></div>
                 <div className="colorOption"></div>
-            </div>
+            </div> */}
         </div>
     )
 }

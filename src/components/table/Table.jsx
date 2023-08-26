@@ -22,11 +22,7 @@ export default function CustomTable({ headers, data, buttonComponents }) {
         {headers.map((header) => (
           <td key={header}>{item[header]}</td>
         ))}
-        <td>
-          <div style={{ display: "flex", gap: "8px" }}>
-            <Group>{buttonComponents}</Group>
-          </div>
-        </td>
+        <td style={{display:'flex',gap:'20px'}}><div>{item.EditButton}</div><div>{item.DeleteButton}</div></td> {/* Render the delete button component */}
       </tr>
     );
   });
@@ -37,7 +33,7 @@ export default function CustomTable({ headers, data, buttonComponents }) {
         <thead>
           <tr>
             {headers.map((header) => (
-              <th key={header}>{header}</th>
+              <th key={header}><h3>{header}</h3></th>
             ))}
             <th></th>
           </tr>
@@ -51,5 +47,5 @@ export default function CustomTable({ headers, data, buttonComponents }) {
 CustomTable.propTypes = {
   headers: PropTypes.arrayOf(PropTypes.string).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  buttonComponents: PropTypes.node.isRequired,
+  // buttonComponents: PropTypes.node.isRequired,
 };
