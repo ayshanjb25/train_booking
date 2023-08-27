@@ -25,6 +25,7 @@ import TravelHistory from './pages/admin/TravelHistory'
 import Revenue from './pages/admin/Revenue';
 import TrackTrain from './pages/passenger/forms/TrackTrain';
 import TrackTrainTable from './pages/admin/TrackTrainTable';
+import HomeSite from './pages/admin/HomeSite';
 
 
 function App() {
@@ -39,9 +40,10 @@ function App() {
 
         
         <Route path="/">
-          <Route index element={<PassengerDashboard />} />
+          <Route index element={<HomeSite />} />
           {/* <Route path="login" element={<Login />} /> */}
           {/* <Route path="admin" element={<AdminUser/>}/> */}
+          <Route path="home" element={<PassengerDashboard/>}/>
           <Route path="admin-profile" element={<AdminProfile/>}/>
           <Route path="travelhistory" element={<TravelHistory/>}/>
           

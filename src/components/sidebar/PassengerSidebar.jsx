@@ -26,7 +26,7 @@ const PassengerSidebar = () => {
                     <p className="title" style={{marginTop:'30px'}}>MAIN</p>
                     <li>
                         <DashboardIcon className='icon'/>
-                        <Link  className='link' to="/">Dashboard</Link>
+                        <Link  className='link' to="/home">Dashboard</Link>
                     </li>
                     <p className="title" style={{marginTop:'30px'}}>LISTS</p>
                     <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
