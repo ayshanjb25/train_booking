@@ -97,9 +97,6 @@ function Loyalty() {
       ];
 
 
-
-
-
   return (
     <div className="form">
       <AdminSidebar />

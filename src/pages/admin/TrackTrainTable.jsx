@@ -72,6 +72,30 @@ function TrackTrainTable() {
   };
 
 
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = {
+      date: event.target.elements.date.value,
+      departureTime: event.target.elements.departureTime.value,
+      arrivalTime: event.target.elements.arrivalTime.value,
+      amount: event.target.elements.amount.value,
+      startLocation: event.target.elements.startLocation.value,
+      stopLocation: event.target.elements.stopLocation.value,
+    };
+
+    try {
+      const response = await axios.post('http://localhost:8800/api/track-trains', formData);
+      console.log('User added successfully:', response.data);
+      console.log(formData)
+      //fetchStations(); // Fetch stations again to update the list
+    } catch (error) {
+      console.error('Error adding user:', error);
+    }
+    };
+
+
   const [selectedTrackTrainFromStation, setSelectedTrackTrainFromStation] = useState('');
   const [selectedTrackTrainToStation, setSelectedTrackTrainToStation] = useState('');
 
@@ -159,7 +183,7 @@ function TrackTrainTable() {
             <div style={{ flex: 2 }}>
               <h2 className="title">{title}</h2>
               <div className={classes.wrapper}>
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div
                     style={{ display: "flex", gap: "50px", marginTop: "10px" }}
                   >
@@ -174,7 +198,6 @@ function TrackTrainTable() {
                       >
                         <Select
                           label="Train"
-                          name="train"
                           placeholder="Select a Train"
                           data={[
                             { value: "Admin", label: "Admin" },
@@ -184,7 +207,7 @@ function TrackTrainTable() {
                         />
                         <Select
                           label="From Station"
-                          name="train"
+                          name="startLocation"
                           placeholder="Select a Train"
                           data={[
                             { value: "Admin", label: "Admin" },
@@ -195,8 +218,15 @@ function TrackTrainTable() {
                         
                         <TextInput
                           label="Start Time"
-                          name="firstname"
+                          name="departureTime"
                           placeholder="Enter your First name"
+                          size="md"
+                        />
+
+<TextInput
+                          label="Amount"
+                          name="amount"
+                          placeholder="Enter Amount"
                           size="md"
                         />
                         
@@ -218,12 +248,13 @@ function TrackTrainTable() {
                   popoverProps={{ withinPortal: true }}
                   label="Departure date"
                   placeholder="Departure date"
+                  name="date"
                   clearable={false}
                   style={{ flex: 1 }}
                 />
                         <Select
                           label="To Station"
-                          name="train"
+                          name="stopLocation"
                           placeholder="Select a Train"
                           data={[
                             { value: "Admin", label: "Admin" },
@@ -233,7 +264,7 @@ function TrackTrainTable() {
                         />
                         <TextInput
                           label="Reach Time"
-                          name="lastname"
+                          name="arrivalTime"
                           placeholder="Enter your Last name"
                           size="md"
                         />

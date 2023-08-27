@@ -77,31 +77,7 @@ function AddUser({userData}) {
     }
   };
 
-  const form = useForm({
-    initialValues: {
-      username: "",
-      fname: "",
-      lname: "",
-      nic: "",
-      email: "",
-      mobile: "",
-      age: 18,
-    },
-
-    validate: {
-      name: hasLength({ min: 2, max: 10 }, "Name must be 2-10 characters long"),
-      job: isNotEmpty("Enter your current job"),
-      email: isEmail("Invalid email"),
-      favoriteColor: matches(
-        /^#([0-9a-f]{3}){1,2}$/,
-        "Enter a valid hex color"
-      ),
-      age: isInRange(
-        { min: 18, max: 99 },
-        "You must be 18-99 years old to register"
-      ),
-    },
-  });
+  
   const { classes } = useStyles();
 
   const handleSubmit = async (event) => {
@@ -119,17 +95,14 @@ function AddUser({userData}) {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:8800/api/auth/register",
-        formData
-      );
-      console.log("User added successfully:", response.data);
-      fetchUsers();
+      const response = await axios.post('http://localhost:8800/api/auth/register', formData);
+      console.log('User added successfully:', response.data);
+      console.log(formData)
       //fetchStations(); // Fetch stations again to update the list
     } catch (error) {
-      console.error("Error adding user:", error);
+      console.error('Error adding user:', error);
     }
-  };
+    };
 
 
   const headers2 = ['User Reference','Full Name', 'User Role','NIC', 'Email','Mobile','Address' ];
@@ -155,6 +128,7 @@ function AddUser({userData}) {
       </Button>
     ),
   })); 
+
 
   const generatePrintableContent = () => {
     // Create a string containing the HTML for the table
@@ -250,19 +224,9 @@ function AddUser({userData}) {
                           marginTop:'15px'
                         }}
                       >
-                        <TextInput
-                          label="First Name"
-                          name="firstname"
-                          placeholder="Enter your First name"
-                          size="md"
-                        />
-                        <TextInput
-                          label="Last Name"
-                          name="lastname"
-                          placeholder="Enter your Last name"
-                          size="md"
-                        />
-                        <Select
+<TextInput label="First Name" name="firstname" placeholder="Enter your First name" size="md" />
+          <TextInput label="Last Name" name="lastname" placeholder="Enter your Last name" size="md" />
+          <Select
                           label="User Role"
                           name="userRole"
                           placeholder="Select a role"
@@ -272,19 +236,22 @@ function AddUser({userData}) {
                           ]}
                           size="md"
                         />
-                        <Textarea
-                          label="Address"
-                          name="address"
-                          placeholder="Enter your address here"
-                          size="md"
-                        />
-                        <TextInput
-                          label="Email address"
-                          name="email"
-                          placeholder="Enter your Email"
-                          mt="md"
-                          size="md"
-                        />
+
+                        
+          <Textarea label="Address" name="address" placeholder="Enter your address here" size="md" />
+          <TextInput label="Email address" name="email" placeholder="Enter your Email" mt="md" size="md" />
+          
+
+
+
+
+
+
+
+
+                       
+                        
+                        
                       </div>
                     </div>
 
@@ -296,33 +263,11 @@ function AddUser({userData}) {
                           gap: "10px",
                         }}
                       >
-                        <TextInput
-                          label="NIC"
-                          name="nic"
-                          placeholder="Enter your NIC"
-                          mt="md"
-                          size="md"
-                        />
-                        <TextInput
-                          label="Mobile Number"
-                          name="mobile"
-                          placeholder="+94xxxxxxxxx"
-                          mt="md"
-                          size="md"
-                        />
-                        <PasswordInput
-                          label="Password"
-                          placeholder="Enter password"
-                          mt="md"
-                          size="md"
-                        />
-                        <PasswordInput
-                          label="Confirm Password"
-                          name="password"
-                          placeholder="Confirm password"
-                          mt="md"
-                          size="md"
-                        />
+                        <TextInput label="NIC" name="nic" placeholder="Enter your NIC" mt="md" size="md" />
+          <TextInput label="Mobile Number" name="mobile" placeholder="+94xxxxxxxxx" mt="md" size="md"  />
+          <PasswordInput label="Password" placeholder="Enter password" mt="md" size="md" />
+          <PasswordInput label="Confirm Password" name="password" placeholder="Confirm password" mt="md" size="md"  />
+
                       </div>
                     </div>
                   </div>
