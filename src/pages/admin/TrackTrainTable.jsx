@@ -86,7 +86,7 @@ function TrackTrainTable() {
     };
 
     try {
-      const response = await axios.post('http://localhost:8800/api/track-trains', formData);
+      const response = await axios.post("http://localhost:8800/api/track-trains", formData);
       console.log('User added successfully:', response.data);
       console.log(formData)
       //fetchStations(); // Fetch stations again to update the list
@@ -142,8 +142,8 @@ function TrackTrainTable() {
 
   const tableData = trackTrains.map((trackTrain) => ({
     "Train Reference": trackTrain.train,
-    Train: trackTrain.train ? trackTrain.train.name : "no trains",
-    "Available Seats": trackTrain.train.capacity,
+    Train: "Ruhunu Devi",
+    "Available Seats": "10",
     "From Station": trackTrain.startLocation,
     "To Station": trackTrain.stopLocation,
     Date: currentDate.toDateString(),
