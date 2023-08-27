@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PassengerSidebar from "../../components/sidebar/PassengerSidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "../forms/user.scss";
-
 import {
   useForm,
   isNotEmpty,
@@ -43,19 +42,9 @@ function Loyalty() {
     },
   });
 
-  const [showPasswordReset, setShowPasswordReset] = useState(false); // State to manage visibility
 
   const [showOriginalForm, setShowOriginalForm] = useState(true);
 
-  const handlePasswordResetClick = () => {
-    setShowPasswordReset(true);
-    setShowOriginalForm(false);
-  };
-
-  const handlePasswordResetCancel = () => {
-    setShowPasswordReset(false);
-    setShowOriginalForm(true);
-  };
 
 
 
@@ -172,17 +161,17 @@ function Loyalty() {
         </div>
 
 
-    <div className='formContainer' style={{ border: 'none', padding: '20px 10px 0px 10px', display: 'flex', flexDirection: 'column' }}>
+        <div className="formContainer" style={{ display: 'flex', flexDirection: 'column'}}>
         <div style={{ marginBottom: '20px' }}>
         <h2 className='title'>Loyalty Level Details</h2>
         <CustomTable headers={headers} data={data} />
-        </div>
+        </div></div>
 
-        <div>
+        <div className="formContainer" style={{ display: 'flex', flexDirection: 'column'}}>
         <h2 className='title'>Passenger Loyalty Details</h2>
         <CustomTable headers={headers2} data={data2} />
         </div>
-    </div>
+    
 
       </div>
     </div>

@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 
 const title = "Track Your Train";
 
-function TrackTrain() {
+function TrackTrain({ onClose, fromStation, toStation }) {
   const mapRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -55,7 +55,7 @@ function TrackTrain() {
 
               <div id="map" style={{ width: '1000px', height: '600px' }} />
               <div style={{display:'flex', flexDirection:'column',gap:'10px',fontSize:'25px', marginTop:'20px', textAlign:'center'}}>
-                <p><b>Route :</b> Colombo - Kandy</p>
+                <p><b>Route :</b> {fromStation} - {toStation}</p>
                 <p><b>Distance :</b> 118km</p>
                 <p><b>Time :</b> 1hr 55min</p>
               </div>

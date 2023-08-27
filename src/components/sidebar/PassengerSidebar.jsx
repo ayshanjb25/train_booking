@@ -34,13 +34,13 @@ const PassengerSidebar = () => {
                         <PersonOutlineOutlinedIcon className='icon'/>
                         <Link className='link' to="/bookseat">Book Seats</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <ShoppingCartOutlinedIcon className='icon'/>
-                        <Link className='link' to="/book">Track Train</Link>
-                    </li>
+                        <Link className='link' to="/trackTrain">Track Train</Link>
+                    </li> */}
                     <li>
                         <CreditCardOutlinedIcon className='icon'/>
-                        <Link className='link' to="/passengertravelhistory">Booking History</Link>
+                        <Link className='link' to="/travelhistory">Booking History</Link>
                     </li>
                     <li>
                         <LocalShippingOutlinedIcon className='icon'/>

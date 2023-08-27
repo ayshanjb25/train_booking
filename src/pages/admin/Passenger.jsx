@@ -22,6 +22,7 @@ import {
 } from "@mantine/core";
 import axios from "axios";
 import CustomTable from "../../components/table/Table";
+import { InputWithButton } from "../../components/SearchInput";
 
 const title = "User Management - Add Users";
 
@@ -155,7 +156,71 @@ function PassengerInfo({userData}) {
     ),
   })); 
 
- 
+  const generatePrintableContent = () => {
+    // Create a string containing the HTML for the table
+    const printableHTML = `
+    <div style="align-items: center; justify-content: center; text-align: center; margin-top:50px;">
+    <h3 style="color:rgb(43, 43, 161);">BookMyTrain</h3>
+  <h4>User Details</h4>
+</div>
+
+    <div style="padding:20px 50px;">
+      <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+          <tr style="border-bottom: 2px solid #000;">
+            <th style="border: 1px solid #000; padding: 8px;">Passenger Reference</th>
+            <th style="border: 1px solid #000; padding: 8px;">Full Name</th>
+            <th style="border: 1px solid #000; padding: 8px;">NIC</th>
+            <th style="border: 1px solid #000; padding: 8px;">Email</th>
+            <th style="border: 1px solid #000; padding: 8px;">Mobile</th>
+            <th style="border: 1px solid #000; padding: 8px;">Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableData
+            .map(
+              (row) => `
+                <tr>
+                  <td style="border: 1px solid #000; padding: 8px;">${
+                    row['Passenger Reference']
+                  }</td>
+                  <td style="border: 1px solid #000; padding: 8px;">${row['Full Name']}</td>
+                  <td style="border: 1px solid #000; padding: 8px;">${row['NIC']}</td>
+                  <td style="border: 1px solid #000; padding: 8px;">${row['Email']}</td>
+                  <td style="border: 1px solid #000; padding: 8px;">${row['Mobile']}</td>
+                  <td style="border: 1px solid #000; padding: 8px;">${row['Address']}</td>
+                </tr>
+              `
+            )
+            .join('')}
+        </tbody>
+      </table>
+    `;
+  
+    // Open a new window and write the printable content
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Printable Users Table</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+            }
+          </style>
+        </head>
+        <body>
+          ${printableHTML}
+        </body>
+      </html>
+    `);
+  
+    // Close the document after printing
+    printWindow.document.close();
+
+    // Print automatically
+  printWindow.print();
+  };
 
   return (
     <div className="form">
@@ -165,10 +230,31 @@ function PassengerInfo({userData}) {
         
 
 
-        <div className='formContainer' style={{border:"none",padding:"20px 10px 0px 10px",display:"flex", flexDirection: "row"}}>
+        <div className='formContainer' style={{display:"flex", flexDirection: "row"}}>
 
             <div style={{flex:2}}>
-            <h2 className='title'>Passengers</h2>
+            <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom:'20px'
+                }}
+              >
+            <h2 className="title" style={{ flex: 3 }}>Passengers</h2>
+            <div style={{ flex: 1 , display:'flex',gap :'20px',alignItems: 'center', justifyContent: 'center'}}>
+                   <InputWithButton
+                      placeholder="Search Passengers"
+                      // value={searchQuery}
+                      // onChange={(event) => setSearchQuery(event.target.value)}
+                      // // Add a click handler to clear search
+                      // onButtonClick={() => setSearchQuery('')}
+                    />
+                    <div style={{alignItems: 'center', justifyContent: 'center'}}>
+                    <Button variant="filled" color="blue" style={{ flex: 0.5, fontSize: "14px"}}  onClick={generatePrintableContent}>
+                Print All Passengers
+              </Button></div>
+                </div></div>
             <CustomTable headers={headers2}
                         data={tableData}
                         />

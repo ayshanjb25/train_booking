@@ -78,7 +78,7 @@ export function PromotionCard() {
           </div>
 
           <Button radius="xl" style={{ flex: 1 }}>
-            Buy now
+            Book now
           </Button>
         </Group>
       </Card.Section>

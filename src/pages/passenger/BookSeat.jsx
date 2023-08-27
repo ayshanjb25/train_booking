@@ -265,11 +265,7 @@ function UserProfile() {
 
         <div
           className="formContainer"
-          style={{
-            border: "none",
-            padding: "20px 10px 0px 10px",
-            flexDirection: "column",
-          }}
+          
         >
           <div
             style={{

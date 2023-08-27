@@ -352,6 +352,71 @@ const [showDeleteForm, setShowDeleteForm] = useState(false);
     ),
   }));
 
+
+
+  const generatePrintableContent = () => {
+    // Create a string containing the HTML for the table
+    const printableHTML = `
+    <div style="align-items: center; justify-content: center; text-align: center; margin-top:50px; ">
+  <h3 style="color:rgb(43, 43, 161);">BookMyTrain</h3>
+  <h4>Train Details</h4>
+</div>
+
+    <div style="padding:20px 50px;">
+      <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+          <tr style="border-bottom: 2px solid #000;">
+            <th style="border: 1px solid #000; padding: 8px;">Train Reference</th>
+            <th style="border: 1px solid #000; padding: 8px;">Train</th>
+            <th style="border: 1px solid #000; padding: 8px;">Route</th>
+            <th style="border: 1px solid #000; padding: 8px;">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableData
+            .map(
+              (row) => `
+                <tr>
+                  <td style="border: 1px solid #000; padding: 8px;">${
+                    row['Train Reference']
+                  }</td>
+                  <td style="border: 1px solid #000; padding: 8px;">${row['Train']}</td>
+                  <td style="border: 1px solid #000; padding: 8px;">${row['Route']}</td>
+                  <td style="border: 1px solid #000; padding: 8px;">${
+                    row['Description']
+                  }</td>
+                </tr>
+              `
+            )
+            .join('')}
+        </tbody>
+      </table>
+    `;
+  
+    // Open a new window and write the printable content
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Printable Trains Table</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+            }
+          </style>
+        </head>
+        <body>
+          ${printableHTML}
+        </body>
+      </html>
+    `);
+  
+    // Close the document after printing
+    printWindow.document.close();
+
+    // Print automatically
+  printWindow.print();
+  };
  
   
 
@@ -404,8 +469,21 @@ const [showDeleteForm, setShowDeleteForm] = useState(false);
                 <h2 className="title" style={{ flex: 3 }}>
                   {title}
                 </h2>
-                <div style={{ flex: 1 }}>
-                  <InputWithButton placeholder="Search Trains" />
+
+
+                
+                <div style={{ flex: 1 , display:'flex',gap :'20px',alignItems: 'center', justifyContent: 'center'}}>
+                   <InputWithButton
+                      placeholder="Search Trains"
+                      // value={searchQuery}
+                      // onChange={(event) => setSearchQuery(event.target.value)}
+                      // // Add a click handler to clear search
+                      // onButtonClick={() => setSearchQuery('')}
+                    />
+                    <div style={{alignItems: 'center', justifyContent: 'center'}}>
+                    <Button variant="filled" color="blue" style={{ flex: 0.5, fontSize: "14px"}}  onClick={generatePrintableContent}>
+                Print All Trains
+              </Button></div>
                 </div>
               </div>
               {loading ? (
@@ -418,6 +496,11 @@ const [showDeleteForm, setShowDeleteForm] = useState(false);
                   // buttonComponents={btns}
                 />
               )}
+
+
+
+
+
               {showUpdateForm && (
                 <div className="update-form-overlay">
                   <UpdateTrainForm

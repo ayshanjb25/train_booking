@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { CardSection, createStyles, rem } from '@mantine/core';
 import Card from '../../components/Card';
 import AdminSidebar from '../../components/sidebar/AdminSidebar';
@@ -7,6 +7,7 @@ import { InputWithButton } from '../../components/SearchInput';
 import CustomTable from '../../components/table/Table';
 import StatsSection from '../../components/Card';
 import { IconCoin, IconUser, IconTicket, IconChartBar } from '@tabler/icons-react';
+import axios from 'axios';
 
 const title= 'title';
 
@@ -22,11 +23,64 @@ const useStyles = createStyles((theme) => ({
 
 export function AdminDashboard({ data }) {
   const { classes, theme } = useStyles();
+  const [trains, setTrains] = useState([]);
+  const [stations, setStations] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
-  const headers = ['id','name'];
-  const tableData = [{'id':'123','name':'aisha'},{'id':'123','name':'aisha'},{'id':'123','name':'aisha'},{'id':'123','name':'aisha'}];
-  const icons = {
+  useEffect(() => {
+    fetchStations();
+  }, []);
+
+  const fetchStations = async () => {
+    try {
+      const response = await axios.get("http://localhost:8800/api/stations");
+      setStations(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching stations:", error);
+      setLoading(false);
+    }
+  };
+  
+
+  // to fetch stations details to table
+  useEffect(() => {
+    fetchTrains();
+  }, []);
+
+  const fetchTrains = async () => {
+    try {
+      const response = await axios.get("http://localhost:8800/api/trains");
+      setTrains(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching trains:", error);
+      setLoading(false);
+    }
+  };
+
+
+  const headers = ["Station", "Location", "Description"];
+
+  const tableData = stations.map((station) => ({
+    Station: station.name,
+    Location: station.location,
+    Description: station.description
+    
+  }));
+  
+
+
+  const headers2 = ["Train", "Route"];
+
+  const tableData2 = trains.map((train) => ({
+            Train: train.name,
+            Route:train.route
+  
+  }));
+
+const icons = {
     user: IconUser,
     discount: IconChartBar,
     ticket: IconTicket,
@@ -76,8 +130,8 @@ export function AdminDashboard({ data }) {
             />
             </div>
           </div>
-
-          <div className="formContainer">
+          <div style={{border:'1px solid hsl(0, 10%, 94%)', width:'95.6%', margin:'50px',padding:'50px 0px',display:"flex", flexDirection:'row',gap:'0px'}}>
+          <div className="formContainer" style={{ flex:10,width:'35%'}}>
             <div style={{ flex: 1 }}>
               <div
                 style={{
@@ -87,11 +141,9 @@ export function AdminDashboard({ data }) {
                 }}
               >
                 <h2 className="title" style={{ flex: 3 }}>
-                  {title}
+                  Top Stations
                 </h2>
-                <div style={{ flex: 1 }}>
-                  <InputWithButton placeholder="Search Stations" />
-                </div>
+                
               </div>
               
                 <CustomTable
@@ -105,6 +157,34 @@ export function AdminDashboard({ data }) {
               
             </div>
           </div>
+
+          <div className="formContainer" style={{flex:1, width:'25%'}}>
+            <div style={{ flex: 1 }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <h2 className="title" style={{ flex: 3 }}>
+                Top Trains
+                </h2>
+                
+              </div>
+              
+                <CustomTable
+                  headers={headers2}
+                  data={tableData2}
+                  getRowId={(row) => row._id}
+                />
+             
+              
+              
+            </div>
+          </div>
+          </div>
+
         </div>
       </div>
     </div>

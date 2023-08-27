@@ -1,11 +1,13 @@
-import React from 'react'; 
-import { CardSection, createStyles, rem } from '@mantine/core';
+import React, { useEffect, useState } from "react";
+import { Button, CardSection, createStyles, rem } from '@mantine/core';
 import Navbar from '../../components/navbar/Navbar';
 import { IconCoin, IconChartBar, IconTicket,  IconTrain, IconClock } from '@tabler/icons-react';
 import CustomTable from '../../components/table/Table';
 import StatsSection from '../../components/Card';
 import PassengerSidebar from '../../components/sidebar/PassengerSidebar';
 import { PromotionCard } from '../../components/PromotionCard';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const title= 'Travel History';
 
@@ -19,13 +21,43 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+
+
 export function PassengerDashboard({ data }) {
   const { classes, theme } = useStyles();
 
+  const [travels, setTravel] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const headers = ['id','name'];
-  const tableData = [{'id':'123','name':'aisha'},{'id':'123','name':'aisha'},{'id':'123','name':'aisha'},{'id':'123','name':'aisha'}];
+  useEffect(() => {
+    fetchTravel();
+  }, []);
 
+
+  const fetchTravel = async () => {
+    try {
+      const response = await axios.get("http://localhost:8800/api/travelHistory");
+      setTravel(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching travel history:", error);
+      setLoading(false);
+    }
+  };
+
+  const headers = [ "Date", "From Location","To Location","Distance","Train", "Ticket Count","Amount Paid","Points Earned"];// const data2 = [
+
+  const tableData = travels.map((travel) => ({
+    
+    "Date":travel.date,
+    "From Location":travel.fromLocation,
+    "To Location": travel.toLocation,
+    "Distance": travel.distance,
+    "Train": travel.train,
+    "Ticket Count": travel.ticketCount,
+    "Amount Paid":travel.amountPaid,
+    "Points Earned":travel.pointsEarned
+  }));
   const icons = {
     time: IconClock,
     km: IconTrain,
@@ -77,7 +109,18 @@ export function PassengerDashboard({ data }) {
             </div>
           </div>
 
-
+          <div className="formContainer">
+            
+            <div style={{display:'flex',flexDirection:'row', justifyContent:'center',gap:'100px',padding:'10px'}}>
+             <div display={{display:'flex',flexDirection:'row',alignItems:'center', justifyContent:'center'}}> <div style={{display:'flex',flexDirection:'column',padding:'0px'}}>
+            <p style={{color:'rgb(43, 43, 161)', fontSize:'40px'}}>Book your Seat</p>
+            <p style={{color:'rgb(43, 43, 161)', fontSize:'25px'}}>You can book both ways</p></div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Button size={50} style={{backgroundColor:'rgb(43, 43, 161)', padding:'20px'}}> <Link to="/bookseat" style={{textDecoration:'none', color:'white'}}>Book Seat</Link> </Button>
+    </div></div>
+            
+          </div>
           <div className="formContainer">
             <h2>Promotions</h2>
             <div style={{display:'flex',flexDirection:'row', justifyContent:'space-around',gap:'30px',padding:'0px'}}>

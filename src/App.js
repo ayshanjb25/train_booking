@@ -1,8 +1,5 @@
-import Home from './pages/home/Home'
-import  { AuthenticationImage, Login } from './pages/login/Login'
-import List from './pages/list/List'
-import New from './pages/new/New'
-import Single from './pages/single/Single'
+
+import  { Login } from './pages/login/Login'
 import UserProfile from './pages/passenger/UserProfile'
 import {
   BrowserRouter,
@@ -11,25 +8,23 @@ import {
 } from "react-router-dom";
 import BookingHistory from './pages/tables/BookingHistory'
 import BookSeat from './pages/passenger/BookSeat'
-import BookingOrder from './pages/passenger/BookingOrder'
 import Payment from './pages/passenger/Payment'
-import AdminUser from './pages/admin/AdminUser'
 import AdminProfile from './pages/admin/AdminProfile'
 import Station from './pages/admin/Station'
 import PassengerInfo from './pages/admin/Passenger'
-import UpdatePassengerForm from './pages/admin/forms/UpdatePassenger'
-import DeleteForm from './pages/admin/forms/delete'
 import BookTrainForm from './pages/passenger/forms/BookTrain'
 import Register from './pages/register/Register'
 import PassengerTravelHistory from './pages/admin/PassengerTravelHistory'
-import ViewTravelHistory from './pages/admin/forms/ViewTravelDetails'
-import ViewTravelHistoryForm from './pages/admin/forms/ViewTravelDetails'
 import Train from './pages/admin/Train'
 import AddUser from './pages/admin/AddUsers'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import PassengerDashboard from './pages/admin/PassengerDashboard'
 import Discounts from './pages/admin/Discounts'
 import Loyalty from './pages/admin/Loyalty'
+import TravelHistory from './pages/admin/TravelHistory'
+import Revenue from './pages/admin/Revenue';
+import TrackTrain from './pages/passenger/forms/TrackTrain';
+import TrackTrainTable from './pages/admin/TrackTrainTable';
 
 
 function App() {
@@ -48,22 +43,13 @@ function App() {
           {/* <Route path="login" element={<Login />} /> */}
           {/* <Route path="admin" element={<AdminUser/>}/> */}
           <Route path="admin-profile" element={<AdminProfile/>}/>
-          <Route path="passengertravelhistory" element={<PassengerTravelHistory/>}/>
+          <Route path="travelhistory" element={<TravelHistory/>}/>
           
           <Route path="/login" element={<Login/>}/>
           <Route path="register" element={<Register/>}/>
           
          
-          <Route path="users">
-            <Route index element={<List />} />
-            <Route path="new" element={<New />} />
-            <Route path=":userId" element={<Single />} />
-          </Route>
-          <Route path="products">
-            <Route index element={<List />} />
-            <Route path="new" element={<New />} />
-            <Route path=":productId" element={<Single />} />
-          </Route>
+          
           <Route path="book" element={<BookSeat />} />
           {/* <Route path="booking-order" element={<BookingOrder />} /> */}
           <Route path="booking-order" element={<Payment />} />
@@ -75,7 +61,7 @@ function App() {
           </Route>
           <Route path="bookseat" element={<BookSeat/>}/>
           <Route path="booktrain" element={<BookTrainForm/>}/>
-          <Route index element={<Home />} />
+          
         {/* <Route
           path="dashboard"
           element={<Dashboard />}
@@ -97,6 +83,8 @@ function App() {
           <Route path="admin-dashboard" element={<AdminDashboard/>}/>
           <Route path="discounts" element={<Discounts/>}/>
           <Route path="loyalty" element={<Loyalty/>}/>
+          <Route path="revenue" element={<Revenue/>}/>
+          <Route path="trackTrain" element={<TrackTrainTable/>}/>
 
 
 

@@ -39,6 +39,10 @@ const AdminSidebar = () => {
                         <PersonOutlineOutlinedIcon className='icon'/>
                         <Link className='link' to="/admin/users">User Details</Link>
                     </li>
+                    <li>
+                        <PersonOutlineOutlinedIcon className='icon'/>
+                        <Link className='link' to="/admin/trackTrain">Track Trains</Link>
+                    </li>
                     
                     </div>
                     <p className="title" style={{marginTop:'30px'}}>PASSENGER MANAGEMENT</p>
@@ -50,6 +54,10 @@ const AdminSidebar = () => {
                     <li>
                         <NotificationsNoneOutlinedIcon className='icon'/>
                         <Link className='link' to="/admin/passengertravelhistory">Travel History</Link>
+                    </li>
+                    <li>
+                        <NotificationsNoneOutlinedIcon className='icon'/>
+                        <Link className='link' to="/admin/loyalty">Passenger Loyalty</Link>
                     </li></div>
                     <p className="title" style={{marginTop:'30px'}}>SERVICE</p>
                     <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
@@ -60,7 +68,7 @@ const AdminSidebar = () => {
                     </li>
                     <li>
                         <SettingsSystemDaydreamOutlinedIcon className='icon'/>
-                        <span className='link'>Revenue</span>
+                        <Link className='link' to="/admin/revenue">Revenue</Link>
                         
                     </li>
                     <li>
